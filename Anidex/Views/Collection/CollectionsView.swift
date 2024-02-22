@@ -11,6 +11,14 @@ import SwiftUI
 
 struct CollectionsView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.colorScheme) var colorScheme
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Sighting.scientificName, ascending: true)],
+        animation: .default)
+    private var animal_sightings: FetchedResults<Sighting>
+    
+    
     var body : some View {
         ZStack {
             VStack {
