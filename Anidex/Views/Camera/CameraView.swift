@@ -142,38 +142,35 @@ func loadImage() {
                                 .clipShape(Circle())
                             
                         }).shadow(radius:2)
-                        
-                        if camera.isTaken {
-                            
-                            ZStack {
-                                // Show ProgressView while processing
-                                if camera.isProcessing || camera.showClassificationAlert {
-                                    ProgressView().progressViewStyle(.circular).padding(30)
-                                } else {
-                                    Text(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName)
-                                        .font(.footnote)
-                                        .padding(12)
-                                        .background(Capsule().fill(Color.white.opacity(0.8)).overlay(Capsule().stroke(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel), lineWidth: 3)))
-                                    //                                    .clipShape(Capsule())
-                                    
-                                        .foregroundColor(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel))
-                                        .padding(.horizontal, 5)
-                                        .contextMenu {
-                                            Button(action: {
-                                                UIPasteboard.general.string = !camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName
-                                            }) {
-                                                Text("Copy Message")
-                                                Image(systemName: "doc.on.doc")
-                                            }
-                                        }
-                                    
-                                }
-                                
-                            }
-                        }
+
+    
                         Spacer()
                     }
                     Spacer()
+                    if camera.isTaken {
+                        VStack {
+                            if camera.isProcessing || camera.showClassificationAlert {
+                                ProgressView().progressViewStyle(.circular).padding(15)
+                            } else {
+                                Text(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName)
+                                    .font(.footnote)
+                                    .padding(12)
+                                    .background(Capsule().fill(Color.white.opacity(0.8)).overlay(Capsule().stroke(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel), lineWidth: 3)))
+                                
+                                    .foregroundColor(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel))
+                                    .padding(.horizontal, 5)
+                                    .contextMenu {
+                                        Button(action: {
+                                            UIPasteboard.general.string = !camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName
+                                        }) {
+                                            Text("Copy Message")
+                                            Image(systemName: "doc.on.doc")
+                                        }
+                                    }
+                            }
+                            Spacer()
+                        }
+                    }
                 }
                 .padding(.trailing, 10)
                 .padding(.leading, 25)
