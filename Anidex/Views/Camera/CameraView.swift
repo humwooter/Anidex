@@ -149,12 +149,12 @@ func loadImage() {
                     Spacer()
                     if camera.isTaken {
                         VStack {
-                            if camera.isProcessing || camera.showClassificationAlert {
+                            if camera.isProcessing || !camera.showClassificationAlert {
                                 ProgressView().progressViewStyle(.circular).padding(15)
                             } else {
                                 Text(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName)
                                     .font(.footnote)
-                                    .padding(12)
+                                    .padding(15)
                                     .background(Capsule().fill(Color.white.opacity(0.8)).overlay(Capsule().stroke(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel), lineWidth: 3)))
                                 
                                     .foregroundColor(colorForConfidence(confidenceString: camera.classifierModel.confidenceLabel))
