@@ -13,6 +13,26 @@
 		4A8E809A2B85D0D20032D1C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80992B85D0D20032D1C0 /* ContentView.swift */; };
 		4A8E809C2B85D0D50032D1C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8E809B2B85D0D50032D1C0 /* Assets.xcassets */; };
 		4A8E80A02B85D0D50032D1C0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8E809F2B85D0D50032D1C0 /* Preview Assets.xcassets */; };
+		4A8E80AD2B868BB30032D1C0 /* Sighting+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80A92B868BB30032D1C0 /* Sighting+CoreDataClass.swift */; };
+		4A8E80AE2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80AA2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift */; };
+		4A8E80AF2B868BB30032D1C0 /* Species+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80AB2B868BB30032D1C0 /* Species+CoreDataClass.swift */; };
+		4A8E80B02B868BB30032D1C0 /* Species+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80AC2B868BB30032D1C0 /* Species+CoreDataProperties.swift */; };
+		4A8E80B32B868C7C0032D1C0 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80B22B868C7C0032D1C0 /* CameraModel.swift */; };
+		4A8E80B52B868C880032D1C0 /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80B42B868C880032D1C0 /* ClassifierModel.swift */; };
+		4A8E80B72B868CCC0032D1C0 /* CameraFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80B62B868CCC0032D1C0 /* CameraFuncs.swift */; };
+		4A8E80B92B8690CD0032D1C0 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80B82B8690CD0032D1C0 /* CameraView.swift */; };
+		4A8E80BC2B8691460032D1C0 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80BB2B8691460032D1C0 /* CollectionsView.swift */; };
+		4A8E80BE2B86917B0032D1C0 /* CollectionsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80BD2B86917B0032D1C0 /* CollectionsCard.swift */; };
+		4A8E80C02B8691870032D1C0 /* CollectionsCardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80BF2B8691870032D1C0 /* CollectionsCardDetailView.swift */; };
+		4A8E80C22B8691ED0032D1C0 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80C12B8691ED0032D1C0 /* Design.swift */; };
+		4A8E80C52B86924B0032D1C0 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80C42B86924A0032D1C0 /* CameraPreview.swift */; };
+		4A8E80C72B8694430032D1C0 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80C62B8694430032D1C0 /* HapticFeedback.swift */; };
+		4A8E80C92B8696640032D1C0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80C82B8696640032D1C0 /* ImagePicker.swift */; };
+		4A8E80CF2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CA2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel */; };
+		4A8E80D02B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CB2B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel */; };
+		4A8E80D12B86D64F0032D1C0 /* MammalClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CC2B86D64F0032D1C0 /* MammalClassifier.mlmodel */; };
+		4A8E80D22B86D64F0032D1C0 /* AvesClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */; };
+		4A8E80D32B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CE2B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +44,26 @@
 		4A8E809B2B85D0D50032D1C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A8E809D2B85D0D50032D1C0 /* Anidex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Anidex.entitlements; sourceTree = "<group>"; };
 		4A8E809F2B85D0D50032D1C0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4A8E80A92B868BB30032D1C0 /* Sighting+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sighting+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4A8E80AA2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sighting+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4A8E80AB2B868BB30032D1C0 /* Species+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Species+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4A8E80AC2B868BB30032D1C0 /* Species+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Species+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4A8E80B22B868C7C0032D1C0 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		4A8E80B42B868C880032D1C0 /* ClassifierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassifierModel.swift; sourceTree = "<group>"; };
+		4A8E80B62B868CCC0032D1C0 /* CameraFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFuncs.swift; sourceTree = "<group>"; };
+		4A8E80B82B8690CD0032D1C0 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		4A8E80BB2B8691460032D1C0 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
+		4A8E80BD2B86917B0032D1C0 /* CollectionsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsCard.swift; sourceTree = "<group>"; };
+		4A8E80BF2B8691870032D1C0 /* CollectionsCardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsCardDetailView.swift; sourceTree = "<group>"; };
+		4A8E80C12B8691ED0032D1C0 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		4A8E80C42B86924A0032D1C0 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		4A8E80C62B8694430032D1C0 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
+		4A8E80C82B8696640032D1C0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4A8E80CA2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ChordataClassClassifier.mlmodel; sourceTree = "<group>"; };
+		4A8E80CB2B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AmphibiaClassifier.mlmodel; sourceTree = "<group>"; };
+		4A8E80CC2B86D64F0032D1C0 /* MammalClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MammalClassifier.mlmodel; sourceTree = "<group>"; };
+		4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AvesClassifier.mlmodel; sourceTree = "<group>"; };
+		4A8E80CE2B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ReptilliaClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +80,12 @@
 		4A8E80862B85D0D10032D1C0 = {
 			isa = PBXGroup;
 			children = (
+				4A8E80CB2B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel */,
+				4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */,
+				4A8E80CA2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel */,
+				4A8E80CC2B86D64F0032D1C0 /* MammalClassifier.mlmodel */,
+				4A8E80CE2B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel */,
+				4A8E80B12B868C470032D1C0 /* Core Data */,
 				4A8E80912B85D0D20032D1C0 /* Anidex */,
 				4A8E80902B85D0D20032D1C0 /* Products */,
 			);
@@ -56,9 +102,11 @@
 		4A8E80912B85D0D20032D1C0 /* Anidex */ = {
 			isa = PBXGroup;
 			children = (
+				4A8E80A82B868B2F0032D1C0 /* Public Helpers */,
+				4A8E80A72B868B250032D1C0 /* Models */,
+				4A8E80A62B868B1F0032D1C0 /* Views */,
 				4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */,
 				4A8E80942B85D0D20032D1C0 /* Persistence.swift */,
-				4A8E80992B85D0D20032D1C0 /* ContentView.swift */,
 				4A8E809B2B85D0D50032D1C0 /* Assets.xcassets */,
 				4A8E809D2B85D0D50032D1C0 /* Anidex.entitlements */,
 				4A8E80962B85D0D20032D1C0 /* Anidex.xcdatamodeld */,
@@ -73,6 +121,66 @@
 				4A8E809F2B85D0D50032D1C0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4A8E80A62B868B1F0032D1C0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80C32B8692410032D1C0 /* Camera */,
+				4A8E80BA2B8691310032D1C0 /* Collection */,
+				4A8E80992B85D0D20032D1C0 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4A8E80A72B868B250032D1C0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80B22B868C7C0032D1C0 /* CameraModel.swift */,
+				4A8E80B42B868C880032D1C0 /* ClassifierModel.swift */,
+				4A8E80C82B8696640032D1C0 /* ImagePicker.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A8E80A82B868B2F0032D1C0 /* Public Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80B62B868CCC0032D1C0 /* CameraFuncs.swift */,
+				4A8E80C12B8691ED0032D1C0 /* Design.swift */,
+				4A8E80C62B8694430032D1C0 /* HapticFeedback.swift */,
+			);
+			path = "Public Helpers";
+			sourceTree = "<group>";
+		};
+		4A8E80B12B868C470032D1C0 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80A92B868BB30032D1C0 /* Sighting+CoreDataClass.swift */,
+				4A8E80AA2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift */,
+				4A8E80AB2B868BB30032D1C0 /* Species+CoreDataClass.swift */,
+				4A8E80AC2B868BB30032D1C0 /* Species+CoreDataProperties.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		4A8E80BA2B8691310032D1C0 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80BB2B8691460032D1C0 /* CollectionsView.swift */,
+				4A8E80BD2B86917B0032D1C0 /* CollectionsCard.swift */,
+				4A8E80BF2B8691870032D1C0 /* CollectionsCardDetailView.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		4A8E80C32B8692410032D1C0 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				4A8E80B82B8690CD0032D1C0 /* CameraView.swift */,
+				4A8E80C42B86924A0032D1C0 /* CameraPreview.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,10 +253,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A8E80CF2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel in Sources */,
+				4A8E80B72B868CCC0032D1C0 /* CameraFuncs.swift in Sources */,
+				4A8E80C22B8691ED0032D1C0 /* Design.swift in Sources */,
+				4A8E80C02B8691870032D1C0 /* CollectionsCardDetailView.swift in Sources */,
 				4A8E80982B85D0D20032D1C0 /* Anidex.xcdatamodeld in Sources */,
 				4A8E80932B85D0D20032D1C0 /* AnidexApp.swift in Sources */,
+				4A8E80C72B8694430032D1C0 /* HapticFeedback.swift in Sources */,
+				4A8E80B92B8690CD0032D1C0 /* CameraView.swift in Sources */,
+				4A8E80D12B86D64F0032D1C0 /* MammalClassifier.mlmodel in Sources */,
+				4A8E80C92B8696640032D1C0 /* ImagePicker.swift in Sources */,
+				4A8E80BC2B8691460032D1C0 /* CollectionsView.swift in Sources */,
+				4A8E80D02B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel in Sources */,
+				4A8E80B52B868C880032D1C0 /* ClassifierModel.swift in Sources */,
+				4A8E80AF2B868BB30032D1C0 /* Species+CoreDataClass.swift in Sources */,
+				4A8E80AE2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift in Sources */,
+				4A8E80B02B868BB30032D1C0 /* Species+CoreDataProperties.swift in Sources */,
+				4A8E80C52B86924B0032D1C0 /* CameraPreview.swift in Sources */,
+				4A8E80D22B86D64F0032D1C0 /* AvesClassifier.mlmodel in Sources */,
 				4A8E809A2B85D0D20032D1C0 /* ContentView.swift in Sources */,
 				4A8E80952B85D0D20032D1C0 /* Persistence.swift in Sources */,
+				4A8E80BE2B86917B0032D1C0 /* CollectionsCard.swift in Sources */,
+				4A8E80AD2B868BB30032D1C0 /* Sighting+CoreDataClass.swift in Sources */,
+				4A8E80D32B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel in Sources */,
+				4A8E80B32B868C7C0032D1C0 /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -262,6 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -282,16 +412,22 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app captures photos using the camera to classify animals.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app selects photos from the library to classify animals.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -299,8 +435,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dodum.Anidex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -320,16 +457,22 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The app captures photos using the camera to classify animals.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app selects photos from the library to classify animals.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -337,8 +480,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = dodum.Anidex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

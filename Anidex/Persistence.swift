@@ -14,8 +14,10 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newSighting = Sighting(context: viewContext)
+            newSighting.id = UUID()
+            newSighting.name = "Buffalo"
+            
         }
         do {
             try viewContext.save()
