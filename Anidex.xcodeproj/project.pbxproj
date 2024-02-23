@@ -41,6 +41,8 @@
 		4AA5FA7A2B8845520073FF9E /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA792B8845520073FF9E /* StatsView.swift */; };
 		4AA5FA7C2B8845840073FF9E /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA7B2B8845840073FF9E /* GalleryView.swift */; };
 		4AA5FA7E2B88461B0073FF9E /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA7D2B88461B0073FF9E /* PhotosView.swift */; };
+		4AFA806B2B88926100EF9DCB /* AnimalLabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4AFA806A2B88926100EF9DCB /* AnimalLabels.txt */; };
+		4AFA806E2B88950B00EF9DCB /* SearchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFA806D2B88950B00EF9DCB /* SearchViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		4AA5FA792B8845520073FF9E /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		4AA5FA7B2B8845840073FF9E /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		4AA5FA7D2B88461B0073FF9E /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		4AFA806A2B88926100EF9DCB /* AnimalLabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnimalLabels.txt; sourceTree = "<group>"; };
+		4AFA806D2B88950B00EF9DCB /* SearchViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		4A8E80862B85D0D10032D1C0 = {
 			isa = PBXGroup;
 			children = (
+				4AFA806A2B88926100EF9DCB /* AnimalLabels.txt */,
 				4A8E80CB2B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel */,
 				4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */,
 				4A8E80CA2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel */,
@@ -144,6 +149,7 @@
 		4A8E80A62B868B1F0032D1C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4AFA806C2B8894EA00EF9DCB /* Search Views */,
 				4A8E80C32B8692410032D1C0 /* Camera */,
 				4A8E80BA2B8691310032D1C0 /* Collection */,
 				4A8E80992B85D0D20032D1C0 /* ContentView.swift */,
@@ -217,6 +223,14 @@
 			path = "Card Detail Views";
 			sourceTree = "<group>";
 		};
+		4AFA806C2B8894EA00EF9DCB /* Search Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AFA806D2B88950B00EF9DCB /* SearchViews.swift */,
+			);
+			path = "Search Views";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -275,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFA806B2B88926100EF9DCB /* AnimalLabels.txt in Resources */,
 				4A8E80A02B85D0D50032D1C0 /* Preview Assets.xcassets in Resources */,
 				4A8E809C2B85D0D50032D1C0 /* Assets.xcassets in Resources */,
 			);
@@ -311,6 +326,7 @@
 				4A8E80C52B86924B0032D1C0 /* CameraPreview.swift in Sources */,
 				4AA5FA712B88371D0073FF9E /* newAnimalSightingView.swift in Sources */,
 				4A8E80D22B86D64F0032D1C0 /* AvesClassifier.mlmodel in Sources */,
+				4AFA806E2B88950B00EF9DCB /* SearchViews.swift in Sources */,
 				4A8E809A2B85D0D20032D1C0 /* ContentView.swift in Sources */,
 				4A8E80952B85D0D20032D1C0 /* Persistence.swift in Sources */,
 				4A8E80BE2B86917B0032D1C0 /* CollectionsCard.swift in Sources */,

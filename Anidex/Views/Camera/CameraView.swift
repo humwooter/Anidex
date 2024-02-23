@@ -175,7 +175,7 @@ func loadImage() {
                     Spacer()
                     if camera.isTaken {
                         VStack {
-                            if camera.isProcessing || !camera.showClassificationAlert {
+                            if camera.isProcessing {
                                 ProgressView().progressViewStyle(.circular).padding(15)
                             } else {
                                 Text(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName)

@@ -50,7 +50,7 @@ struct CollectionsCardDetailView: View {
                             .tabItem {
                                 Label("Photos", systemImage: "photo.on.rectangle.angled")
                             }.tag(2)
-                    }.accentColor(.purple)
+                    }.accentColor(Color(animalCategory.classLabel ?? "Mammalia"))
                 }
             }
 

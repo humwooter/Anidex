@@ -29,7 +29,7 @@ struct newAnimalSightingView: View {
             List {
                 animalSightingImage()
                 
-                Section(header: Text("Info")) {
+                Section(header: Text("Name")) {
                     TextField("Name your sighting:", text: $newSightingName)
                         .onTapGesture {
                             focusField = true
@@ -37,8 +37,10 @@ struct newAnimalSightingView: View {
                         .focused($focusField)
 
                 }
-                
-//                GrowingTextField(text: $newSightingNotes, fontSize: UIFont.systemFontSize, fontColor: UIColor(Color(UIColor.label)), cursorColor: UIColor(Color(predictionLabels[0])), initialText: "Add notes about your sighting...")
+                Section(header: Text("Notes")) {
+                    GrowingTextField(text: $newSightingNotes, fontSize: UIFont.systemFontSize, fontColor: UIColor(Color(UIColor.label)), cursorColor: UIColor(Color(predictionLabels[0])), initialText: "Add notes about your sighting...")
+                        .frame(maxHeight: 300)
+                }
 //                    .scaledToFit()
             }
             .navigationTitle(predictionLabels.count > 3 ? "New \(predictionLabels[4]) found" : "New \(predictionLabels[3]) found")
@@ -63,20 +65,22 @@ struct newAnimalSightingView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Image(uiImage: selectedImage)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-//                        .clipShape(Circle())
-//                        .padding()
+
+                        Image(uiImage: selectedImage)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(Circle())
+
                     Spacer()
                 }
-            }.frame(maxWidth: .infinity, maxHeight: 300)
+            }.frame(maxHeight: 300)
+//            .border(LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? ""), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
         .background {
-            LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? ""), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? "Mammalia"), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
         }
-        .clipShape(Circle()).padding()
+        .clipShape(Circle()).padding(40)
+
     }
     
     private func createNewSighting() {

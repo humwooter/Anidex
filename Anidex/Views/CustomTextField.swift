@@ -23,14 +23,14 @@ struct GrowingTextField: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         context.coordinator.textView = textView
-        textView.backgroundColor = UIColor(Color(fontColor).opacity(0.05))
+        textView.backgroundColor = UIColor.clear
         textView.tintColor = cursorColor
         textView.font = UIFont.systemFont(ofSize: fontSize)
         textView.textColor = fontColor
         textView.isScrollEnabled = true
         textView.showsVerticalScrollIndicator = false
         textView.delegate = context.coordinator
-        textView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+        textView.textContainerInset = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
         
         print("makeUIView called for GrowingTextField")
         

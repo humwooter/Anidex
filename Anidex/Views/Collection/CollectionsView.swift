@@ -9,15 +9,51 @@ import Foundation
 import SwiftUI
 
 
+//let adaptiveColumns = [
+//    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
+//    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
+//]
+
 let adaptiveColumns = [
-    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
-    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
+    GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.45, maximum: UIScreen.main.bounds.width * 0.45), spacing: 20),
+    GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.45, maximum: UIScreen.main.bounds.width * 0.45), spacing: 20)
 ]
+
 
 enum FilterCriteria {
     case all, discovered, undiscovered, favorite, mammal, reptile, aves, amphibia
 }
 
+
+struct CollectionsParentView: View {
+    @Binding var isFullscreen: Bool
+    @StateObject private var searchModel = SearchModel()
+    @FocusState private var isSearchFieldFocused: Bool
+
+    
+    var body : some View {
+        CollectionsView(isFullscreen: $isFullscreen, searchModel: searchModel)
+            .searchable(text: $searchModel.searchText, tokens: $searchModel.tokens) { token in
+                        switch token {
+                        case .discovered:
+                            Text("Discovered")
+                        case .favoriteFindings:
+                            Text("Favorites")
+                        case .mammalFindings:
+                            Text("Mammals")
+                        case .avesFindings:
+                            Text("Aves")
+                        case .amphibiaFindings:
+                            Text("Amphibia")
+                        case .reptiliaFindings:
+                            Text("Reptilia")
+                        }
+                
+            }.accentColor(.green)
+            .focused($isSearchFieldFocused)
+
+    }
+}
 struct CollectionsView: View {
     
     
@@ -53,6 +89,10 @@ struct CollectionsView: View {
     @State private var searchText = ""
     @State private var selectedFilter: FilterCriteria = .all
 
+    
+    @Environment(\.isSearching) private var isSearching
+    @ObservedObject var searchModel: SearchModel
+
 
     
     var filteredSpecies: [Species] {
@@ -85,30 +125,37 @@ struct CollectionsView: View {
                     .padding(30)
                     .padding(.vertical, 10)
                 Spacer()
-                
-                //Main view with all of the collections cards:
-                ScrollView {
-                    LazyVGrid(columns: adaptiveColumns, spacing: 20) {
-                        
-                        ForEach(filteredSpecies, id: \.id) { animal_category in
-
-                            CollectionsCard(animalCategory: animal_category)
-                                .environment(\.managedObjectContext, viewContext)
-                                .onTapGesture {
-                                    if ((animal_category.isDiscovered) != false) {
-                                        selectedSpecies = animal_category
-                                    }
-                                }
-                  
+                header()
+                NavigationStack {
+                    List {
+                        if isSearching {
+                            suggestedSearchView()
                         }
-                    }.padding(.horizontal, 20)
+                        
+                        //Main view with all of the collections cards:
+                        ScrollView {
+                            LazyVGrid(columns: adaptiveColumns, spacing: 20) {
+                                
+                                ForEach(filteredSpecies(animalCategories: Array(species), searchText: searchModel.searchText, selectedFilters: searchModel.tokens), id: \.id) { animal_category in
+                                    
+                                    CollectionsCard(animalCategory: animal_category)
+                                        .environment(\.managedObjectContext, viewContext)
+                                        .onTapGesture {
+                                            if ((animal_category.isDiscovered) != false) {
+                                                selectedSpecies = animal_category
+                                            }
+                                        }
+                                    
+                                }
+                            }
+                        }
+                    }
                 }
 
             }
             .frame(maxWidth: .infinity)
             .background(colorScheme == .dark ? Color(UIColor.secondarySystemBackground) : Color(UIColor.tertiarySystemBackground))
             .cornerRadius(40)
-//            .padding(.top, 30)
             .navigationTitle("Collection")
             .sheet(isPresented: Binding(
                    get: { self.isDetailSheetPresented },
@@ -122,5 +169,151 @@ struct CollectionsView: View {
                    }
                }
         }
+    }
+    
+    func filteredSpecies(animalCategories: [Species], searchText: String, selectedFilters: [FilterTokens]) -> [Species] {
+        return animalCategories.filter { animalCategory in
+            let matchesSearchText = searchText.isEmpty || animalCategory.scientificLabel?.lowercased().contains(searchText.lowercased()) ?? false
+
+            let matchesFilter: Bool
+            if selectedFilters.isEmpty {
+                matchesFilter = true // If no filters, consider it a match.
+            } else {
+                matchesFilter = selectedFilters.contains { filter in
+                    switch filter {
+                    case .discovered:
+                        return animalCategory.isDiscovered
+                    case .favoriteFindings:
+                        return animalCategory.isFavorite
+                    case .mammalFindings:
+                        return animalCategory.classLabel == "Mammalia"
+                    case .avesFindings:
+                        return animalCategory.classLabel == "Aves"
+                    case .amphibiaFindings:
+                        return animalCategory.classLabel == "Amphibia"
+                    case .reptiliaFindings:
+                        return animalCategory.classLabel == "Reptilia"
+                    }
+                }
+            }
+
+            return matchesSearchText && matchesFilter
+        }
+    }
+
+
+
+    
+    @ViewBuilder
+    func suggestedSearchView() -> some View {
+        if searchModel.tokens.isEmpty && searchModel.searchText.isEmpty { //present possible tokens
+            
+            Section(header: Text("Suggested")) {
+                Button {
+                    searchModel.tokens.append(.favoriteFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "heart.fill")
+                            .foregroundStyle(Color.pink)
+                            .padding(.horizontal, 5)
+                        Text("Favorite Sightings")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+                
+                Button {
+                    searchModel.tokens.append(.favoriteFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "eye.fill")
+                            .foregroundStyle(Color.yellow)
+                            .padding(.horizontal, 5)
+                        Text("Discovered")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+
+                Button {
+                    searchModel.tokens.append(.mammalFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "hare.fill")
+                            .foregroundStyle(Color("Mammalia"))
+                            .padding(.horizontal, 5)
+
+                        Text("Mammal Sightings")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+                
+                Button {
+                    searchModel.tokens.append(.avesFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "bird.fill")
+                            .foregroundStyle(Color("Aves"))
+                            .padding(.horizontal, 5)
+
+                        Text("Bird Findings")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+                
+                Button {
+                    searchModel.tokens.append(.amphibiaFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "lizard.fill")
+                            .foregroundStyle(Color("Amphibia"))
+                            .padding(.horizontal, 5)
+
+                        Text("Amphibia Findings")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+                
+                Button {
+                    searchModel.tokens.append(.reptiliaFindings)
+                } label: {
+                    HStack {
+                        Image(systemName: "tortoise.fill")
+                            .foregroundStyle(Color("Reptilia"))
+                            .padding(.horizontal, 5)
+
+                        Text("Reptile Findings")
+                            .foregroundStyle(Color(UIColor.label))
+                    }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func header() -> some View {
+        HStack {
+            Spacer()
+            Menu {
+                Menu {
+                    Button("All", action: { selectedFilter = .all })
+                    Button("Discovered", action: { selectedFilter = .discovered })
+                    Button("Undiscovered", action: { selectedFilter = .undiscovered })
+                    Button("Favorites", action: { selectedFilter = .favorite })
+                    ControlGroup("Filter by class") {
+                              Button("Mammals", action: { selectedFilter = .mammal })
+                              Button("Reptiles", action: { selectedFilter = .reptile })
+                              Button("Birds (Aves)", action: { selectedFilter = .aves })
+                              Button("Amphibians", action: { selectedFilter = .amphibia })
+                    }
+                } label: {
+                    Text("Filter")
+                }
+                } label: {
+                    Image(systemName: "slider.horizontal.3")
+                }
+
+           
+
+        }.padding(.horizontal, 30)
+            .foregroundStyle(.green)
     }
 }

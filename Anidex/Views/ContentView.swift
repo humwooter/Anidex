@@ -36,19 +36,13 @@ struct ContentView: View {
                 
                 ZStack {
                     Color(.black).ignoresSafeArea(.all, edges: .all)
-//                        .onAppear {
-//                            let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
-//                            if !hasLaunchedBefore {
-//                                initializeSpecies()
-//                                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
-//                            }
-//                        }
+              
                     
                     CameraView(camera: camera)
                     
                     
                     
-                    CollectionsView(isFullscreen: $isFullscreen).cornerRadius(40)
+                    CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
                         .offset(y: isFullscreen ? 0 : getCollectionsViewOffset(startingOffsetY: startingOffsetY + safeAreaBottom))
                         .frame(height: isFullscreen ? totalHeight : nil) // Full height if fullscreen
                         .gesture(
@@ -71,15 +65,24 @@ struct ContentView: View {
                     
                 }
                 .ignoresSafeArea(edges: .bottom)
-                    .onChange(of: scenePhase) { newPhase in
-                        if ((newPhase != .active) && (newPhase != .inactive)) {
-                            // set to camera state if leave app.
-                            setCameraState(cameraMode: true)
-                        }
+                .onChange(of: scenePhase) { newPhase in
+                    if ((newPhase != .active) && (newPhase != .inactive)) {
+                        // set to camera state if leave app.
+                        setCameraState(cameraMode: true)
                     }
+                }
             }
             
-        }        }
+        }
+        .onAppear {
+            let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+            if !hasLaunchedBefore {
+                initializeSpecies()
+                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            }
+        }
+    }
+    
     private func setCameraState(cameraMode: Bool) {
         withAnimation(.spring()) {
             inCameraMode = cameraMode
@@ -92,7 +95,36 @@ struct ContentView: View {
             currentDragOffsetY = .zero
         }
     }
-
+    
+    private func initializeSpecies() {
+        let input_labels = "AnimalLabels"
+        
+        if let path = Bundle.main.path(forResource: input_labels, ofType: "txt") {
+            do {
+                let data = try String(contentsOfFile: path, encoding: .utf8)
+                let labels = data.components(separatedBy: .newlines)
+                for label in labels {
+                    if !label.isEmpty {
+                        let newSpecies = Species(context: viewContext)
+                        
+                        do {
+                            newSpecies.id = UUID()
+                            newSpecies.commonLabel = label
+                            newSpecies.isDiscovered = false
+                            
+                            try viewContext.save()
+                            
+                        } catch {
+                            print("Failed to save new Sighting entry: \(error)")
+                        }
+                    }
+                }
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
 
     private func getCollectionsViewOffset(startingOffsetY: CGFloat) -> CGFloat {
         

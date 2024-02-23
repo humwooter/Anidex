@@ -40,7 +40,7 @@ struct CollectionsCard: View {
                     Spacer()
                 }
             }
-            .frame(maxHeight: maxRowHeight)
+            .frame(maxWidth: maxRowHeight, maxHeight: maxRowHeight)
             .padding(.vertical, 5)
             .padding(.horizontal,5)
             .background(content: {
@@ -53,7 +53,7 @@ struct CollectionsCard: View {
                 
             })
             .cornerRadius(15)
-            .padding(.horizontal, 5)
+//            .padding(.horizontal, 5)
             .padding(.top, 10)
             .onAppear {
                 if let relationshipSet = animalCategory.relationship as? Set<Sighting>, relationshipSet.count > 0 {
