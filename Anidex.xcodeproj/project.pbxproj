@@ -33,9 +33,18 @@
 		4A8E80D12B86D64F0032D1C0 /* MammalClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CC2B86D64F0032D1C0 /* MammalClassifier.mlmodel */; };
 		4A8E80D22B86D64F0032D1C0 /* AvesClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */; };
 		4A8E80D32B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80CE2B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel */; };
+		4AA5FA6F2B8834150073FF9E /* CustomAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA6E2B8834150073FF9E /* CustomAsyncImageView.swift */; };
+		4AA5FA712B88371D0073FF9E /* newAnimalSightingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA702B88371D0073FF9E /* newAnimalSightingView.swift */; };
+		4AA5FA732B8838EF0073FF9E /* MediaFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA722B8838EF0073FF9E /* MediaFuncs.swift */; };
+		4AA5FA752B8839BB0073FF9E /* Sighting Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA742B8839BB0073FF9E /* Sighting Helpers.swift */; };
+		4AA5FA772B883E960073FF9E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA762B883E960073FF9E /* CustomTextField.swift */; };
+		4AA5FA7A2B8845520073FF9E /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA792B8845520073FF9E /* StatsView.swift */; };
+		4AA5FA7C2B8845840073FF9E /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA7B2B8845840073FF9E /* GalleryView.swift */; };
+		4AA5FA7E2B88461B0073FF9E /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA5FA7D2B88461B0073FF9E /* PhotosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A3609ED2B881E41006F5FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A8E808F2B85D0D20032D1C0 /* Anidex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anidex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnidexApp.swift; sourceTree = "<group>"; };
 		4A8E80942B85D0D20032D1C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -64,6 +73,14 @@
 		4A8E80CC2B86D64F0032D1C0 /* MammalClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MammalClassifier.mlmodel; sourceTree = "<group>"; };
 		4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AvesClassifier.mlmodel; sourceTree = "<group>"; };
 		4A8E80CE2B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ReptilliaClassifier.mlmodel; sourceTree = "<group>"; };
+		4AA5FA6E2B8834150073FF9E /* CustomAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAsyncImageView.swift; sourceTree = "<group>"; };
+		4AA5FA702B88371D0073FF9E /* newAnimalSightingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newAnimalSightingView.swift; sourceTree = "<group>"; };
+		4AA5FA722B8838EF0073FF9E /* MediaFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaFuncs.swift; sourceTree = "<group>"; };
+		4AA5FA742B8839BB0073FF9E /* Sighting Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sighting Helpers.swift"; sourceTree = "<group>"; };
+		4AA5FA762B883E960073FF9E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4AA5FA792B8845520073FF9E /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		4AA5FA7B2B8845840073FF9E /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		4AA5FA7D2B88461B0073FF9E /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +119,7 @@
 		4A8E80912B85D0D20032D1C0 /* Anidex */ = {
 			isa = PBXGroup;
 			children = (
+				4A3609ED2B881E41006F5FFD /* Info.plist */,
 				4A8E80A82B868B2F0032D1C0 /* Public Helpers */,
 				4A8E80A72B868B250032D1C0 /* Models */,
 				4A8E80A62B868B1F0032D1C0 /* Views */,
@@ -129,6 +147,9 @@
 				4A8E80C32B8692410032D1C0 /* Camera */,
 				4A8E80BA2B8691310032D1C0 /* Collection */,
 				4A8E80992B85D0D20032D1C0 /* ContentView.swift */,
+				4AA5FA6E2B8834150073FF9E /* CustomAsyncImageView.swift */,
+				4AA5FA702B88371D0073FF9E /* newAnimalSightingView.swift */,
+				4AA5FA762B883E960073FF9E /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,6 +170,8 @@
 				4A8E80B62B868CCC0032D1C0 /* CameraFuncs.swift */,
 				4A8E80C12B8691ED0032D1C0 /* Design.swift */,
 				4A8E80C62B8694430032D1C0 /* HapticFeedback.swift */,
+				4AA5FA722B8838EF0073FF9E /* MediaFuncs.swift */,
+				4AA5FA742B8839BB0073FF9E /* Sighting Helpers.swift */,
 			);
 			path = "Public Helpers";
 			sourceTree = "<group>";
@@ -167,6 +190,7 @@
 		4A8E80BA2B8691310032D1C0 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				4AA5FA782B8845410073FF9E /* Card Detail Views */,
 				4A8E80BB2B8691460032D1C0 /* CollectionsView.swift */,
 				4A8E80BD2B86917B0032D1C0 /* CollectionsCard.swift */,
 				4A8E80BF2B8691870032D1C0 /* CollectionsCardDetailView.swift */,
@@ -181,6 +205,16 @@
 				4A8E80C42B86924A0032D1C0 /* CameraPreview.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		4AA5FA782B8845410073FF9E /* Card Detail Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AA5FA792B8845520073FF9E /* StatsView.swift */,
+				4AA5FA7B2B8845840073FF9E /* GalleryView.swift */,
+				4AA5FA7D2B88461B0073FF9E /* PhotosView.swift */,
+			);
+			path = "Card Detail Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,11 +290,15 @@
 				4A8E80CF2B86D64F0032D1C0 /* ChordataClassClassifier.mlmodel in Sources */,
 				4A8E80B72B868CCC0032D1C0 /* CameraFuncs.swift in Sources */,
 				4A8E80C22B8691ED0032D1C0 /* Design.swift in Sources */,
+				4AA5FA7E2B88461B0073FF9E /* PhotosView.swift in Sources */,
 				4A8E80C02B8691870032D1C0 /* CollectionsCardDetailView.swift in Sources */,
+				4AA5FA7C2B8845840073FF9E /* GalleryView.swift in Sources */,
 				4A8E80982B85D0D20032D1C0 /* Anidex.xcdatamodeld in Sources */,
+				4AA5FA772B883E960073FF9E /* CustomTextField.swift in Sources */,
 				4A8E80932B85D0D20032D1C0 /* AnidexApp.swift in Sources */,
 				4A8E80C72B8694430032D1C0 /* HapticFeedback.swift in Sources */,
 				4A8E80B92B8690CD0032D1C0 /* CameraView.swift in Sources */,
+				4AA5FA6F2B8834150073FF9E /* CustomAsyncImageView.swift in Sources */,
 				4A8E80D12B86D64F0032D1C0 /* MammalClassifier.mlmodel in Sources */,
 				4A8E80C92B8696640032D1C0 /* ImagePicker.swift in Sources */,
 				4A8E80BC2B8691460032D1C0 /* CollectionsView.swift in Sources */,
@@ -269,12 +307,16 @@
 				4A8E80AF2B868BB30032D1C0 /* Species+CoreDataClass.swift in Sources */,
 				4A8E80AE2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift in Sources */,
 				4A8E80B02B868BB30032D1C0 /* Species+CoreDataProperties.swift in Sources */,
+				4AA5FA732B8838EF0073FF9E /* MediaFuncs.swift in Sources */,
 				4A8E80C52B86924B0032D1C0 /* CameraPreview.swift in Sources */,
+				4AA5FA712B88371D0073FF9E /* newAnimalSightingView.swift in Sources */,
 				4A8E80D22B86D64F0032D1C0 /* AvesClassifier.mlmodel in Sources */,
 				4A8E809A2B85D0D20032D1C0 /* ContentView.swift in Sources */,
 				4A8E80952B85D0D20032D1C0 /* Persistence.swift in Sources */,
 				4A8E80BE2B86917B0032D1C0 /* CollectionsCard.swift in Sources */,
 				4A8E80AD2B868BB30032D1C0 /* Sighting+CoreDataClass.swift in Sources */,
+				4AA5FA7A2B8845520073FF9E /* StatsView.swift in Sources */,
+				4AA5FA752B8839BB0073FF9E /* Sighting Helpers.swift in Sources */,
 				4A8E80D32B86D64F0032D1C0 /* ReptilliaClassifier.mlmodel in Sources */,
 				4A8E80B32B868C7C0032D1C0 /* CameraModel.swift in Sources */,
 			);
@@ -412,6 +454,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Anidex/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app captures photos using the camera to classify animals.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app selects photos from the library to classify animals.";
@@ -421,7 +464,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
@@ -457,6 +499,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Anidex/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "The app captures photos using the camera to classify animals.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "The app selects photos from the library to classify animals.";
@@ -466,7 +509,6 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;

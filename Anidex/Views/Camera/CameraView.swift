@@ -15,9 +15,12 @@ struct CameraView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var camera: CameraModel
     @State private var selectedImage: UIImage?
-    
+
     @State private var isShowingImagePicker = false
     
+    @State private var showAlert = false
+    @State private var showCreationPage = false
+
     
     var body: some View {
         NavigationStack {
@@ -54,8 +57,30 @@ struct CameraView: View {
                   message: Text("Please enable camera access in settings."),
                   dismissButton: .default(Text("OK")))
         }
+        .alert("Classification Result", isPresented: $camera.showClassificationAlert) {
+            Button("Save", role: .cancel) {
+                showAlert = false
+                showCreationPage = true
+            }
+            Button("Dismiss", role: .destructive) {
+                showAlert = false
+            }
+        } message: {
+            Text("Prediction: \(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName) \nConfidence: \(camera.classifierModel.confidenceLabel)")
+                .foregroundColor(.green)
+             
+        }
         .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
             ImagePicker(selectedImage: self.$selectedImage, sourceType: .photoLibrary)
+        }
+        .sheet(isPresented: $showCreationPage) {
+            if let image = selectedImage {
+                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image)
+            }
+            if selectedImage == nil, let image = UIImage(data: camera.originalData) {
+                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image)
+            }
+            
         }
 }
 
@@ -120,6 +145,7 @@ func loadImage() {
                         Spacer()
                     }.padding(.trailing, 15)
                         .padding(.top, 25)
+                    
                 }
                 
             }
