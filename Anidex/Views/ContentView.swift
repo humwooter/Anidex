@@ -13,14 +13,16 @@ struct ContentView: View {
     @StateObject var camera = CameraModel()
     @State private var panelHeight: CGFloat = 100 // Minimized height
     @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.85
-
+    
     @State var currentDragOffsetY: CGFloat = .zero
     @State var endingOffsetY: CGFloat = .zero
     @State private var isFullscreen = false
     @State var inCameraMode: Bool = true;
     @Environment(\.scenePhase) var scenePhase
-
+    
     @State private var endOffset:CGFloat = 0
+    @ObservedObject private var userPreferences = UserPreferences()
+    
     
     var body : some View {
         VStack {
@@ -36,9 +38,10 @@ struct ContentView: View {
                 
                 ZStack {
                     Color(.black).ignoresSafeArea(.all, edges: .all)
-              
+                    
                     
                     CameraView(camera: camera)
+                        .environmentObject(userPreferences)
                     
                     
                     
@@ -74,13 +77,12 @@ struct ContentView: View {
             }
             
         }.accentColor(.green)
-        .onAppear {
-            let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
-            if !hasLaunchedBefore {
-                initializeSpecies()
-                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            .onAppear {
+                if !userPreferences.hasInitializedSpecies {
+                    initializeSpecies()
+                    userPreferences.hasInitializedSpecies = true
+                }
             }
-        }
     }
     
     private func setCameraState(cameraMode: Bool) {
@@ -100,85 +102,37 @@ struct ContentView: View {
         let input_labels = "AnimalLabels"
         
         if let path = Bundle.main.path(forResource: input_labels, ofType: "txt") {
-            do {
-                let data = try String(contentsOfFile: path, encoding: .utf8)
-                let labels = data.components(separatedBy: .newlines)
-                for label in labels {
-                    if !label.isEmpty {
-                        let newSpecies = Species(context: viewContext)
-                        
-                        do {
-                            newSpecies.id = UUID()
-                            newSpecies.commonLabel = label
-                            newSpecies.isDiscovered = false
-                            
-                            try viewContext.save()
-                            
-                        } catch {
-                            print("Failed to save new Sighting entry: \(error)")
-                        }
-                    }
-                }
-                
-            } catch {
-                print(error)
-            }
-        }
-    }
-
+               do {
+                   let data = try String(contentsOfFile: path, encoding: .utf8)
+                   let labels = data.components(separatedBy: .newlines)
+                   for label in labels {
+                       if !label.isEmpty {
+                           let newSpecies = Species(context: viewContext)
+                           
+                           let components = label.components(separatedBy: " ")
+                           if components.count == 2 {
+                               newSpecies.id = UUID()
+                               newSpecies.commonLabel = components[0]
+                               newSpecies.classLabel = components[1]
+                               newSpecies.isDiscovered = false
+                               
+                               do {
+                                   try viewContext.save()
+                               } catch {
+                                   print("Failed to save new Species entry: \(error)")
+                               }
+                           }
+                       }
+                   }
+                   
+               } catch {
+                   print(error)
+               }
+           }
+       }
+    
     private func getCollectionsViewOffset(startingOffsetY: CGFloat) -> CGFloat {
         
         return max(3, endingOffsetY + startingOffsetY + currentDragOffsetY)
     }
-
-//                .onAppear {
-//                    let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
-//                    if !hasLaunchedBefore {
-//                        initializeSpecies()
-//                        UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
-//                    }
-//                }
-        }
-//    }
-
-    
-
-
-struct DraggablePanel: View {
-
-    @Binding var panelHeight: CGFloat
-
-    var body: some View {
-        VStack(spacing: 0) {
-            // Panel content
-        }
-        .frame(maxHeight: .infinity, alignment: .bottom)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.gray, lineWidth: 1)
-        )
-        .frame(maxHeight: .infinity, alignment: .bottom)
-                .background(/* styling */)
-                .coordinateSpace(name: "panel")
-                .frame(height: panelHeight)
-//                .gesture(
-//                    DragGesture().onChanged { value in
-//                        let translation = value.translation.height
-//                        self.panelHeight = max(100, min(500, translation + self.panelHeight))
-//                    }
-//                )
-//        .frame(height: panelHeight)
-//        .gesture(
-//            DragGesture().onChanged { value in
-//                self.panelHeight = max(100, min(500, value.translation.height + self.panelHeight))
-//            }
-//        )
-    }
 }
-
-
-

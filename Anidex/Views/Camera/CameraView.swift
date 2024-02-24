@@ -20,8 +20,8 @@ struct CameraView: View {
     
     @State private var showAlert = false
     @State private var showCreationPage = false
+    @EnvironmentObject var userPreferences: UserPreferences
 
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -43,14 +43,15 @@ struct CameraView: View {
                       }
                     }
                     buttonBar_vertical()
-//                    Spacer()
-//                    buttonBar_horizontal().padding(.bottom, 25)
             }
        
         
     }
         .onAppear(perform: {
-            camera.checkPermissions()
+            if !userPreferences.hasCameraAccess {
+                camera.checkPermissions()
+                userPreferences.hasCameraAccess = true
+            }
         })
         .alert(isPresented: $camera.showAlert) {
             Alert(title: Text("Permission Denied"),

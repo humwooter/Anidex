@@ -18,6 +18,6 @@ class SearchModel: ObservableObject {
 }
 
 enum FilterTokens: String, Identifiable, Hashable, CaseIterable {
-    case discovered, favoriteFindings, mammalFindings, avesFindings, amphibiaFindings, reptiliaFindings
+    case discovered, undiscovered, favoriteFindings, mammalFindings, avesFindings, amphibiaFindings, reptiliaFindings
     var id: Self { self }
 }

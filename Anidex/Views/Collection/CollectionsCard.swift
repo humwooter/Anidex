@@ -13,6 +13,8 @@ import CoreData
 struct CollectionsCard: View {
     
     @ObservedObject var animalCategory: Species
+    @Environment(\.colorScheme) var colorScheme
+
     var maxRowHeight : CGFloat = 200
     var imageLength: CGFloat = 100
     @State private var isFavorite: Bool = false
@@ -45,11 +47,15 @@ struct CollectionsCard: View {
             .padding(.horizontal,5)
             .background(content: {
                 ZStack {
-                    Color.white
-                    LinearGradient(gradient: Gradient(colors: [Color("Chordata"), Color(animalCategory.classLabel ?? "Mammalia")]), startPoint: .top, endPoint: .bottom)
-                        .edgesIgnoringSafeArea(.all)
-                    
+                    if animalCategory.isDiscovered {
+                        Color.white
+                        LinearGradient(gradient: Gradient(colors: [Color("Chordata"), Color(animalCategory.classLabel ?? "Mammalia")]), startPoint: .top, endPoint: .bottom)
+                    } else {
+                        Color(UIColor.systemFill)
+                    }
                 }
+                .edgesIgnoringSafeArea(.all)
+
                 
             })
             .cornerRadius(15)
@@ -74,30 +80,33 @@ struct CollectionsCard: View {
                     .clipped()
                     .cornerRadius(25)
                     .padding(.horizontal, 5)
+                
+            }
+
+        }
+        else {
+            if animalCategory.isDiscovered {
+                Image("default")
+                    .resizable()
+                    .scaledToFit()
+                    .clipped()
+                    .cornerRadius(25)
+                    .padding(.horizontal, 5)
             }
             else {
-                if animalCategory.isDiscovered {
-                    Image("default")
-                        .resizable()
-                        .scaledToFit()
-                    
-                        .frame(width: imageLength, height: imageLength, alignment: .center)
-                        .clipped()
-                        .cornerRadius(25)
-                        .padding(.horizontal, 5)
-                }
-                else {
-                    Image("undiscovered")
-                        .resizable()
-                        .scaledToFit()
-                    
-                        .frame(width: imageLength, height: imageLength, alignment: .center)
-                        .clipped()
-                        .cornerRadius(25)
-                        .padding(.horizontal, 5)
-                }
+                Image("undiscovered")
+                    .resizable()
+                    .scaledToFit()
+                
+                    .clipped()
+                    .cornerRadius(25)
+                    .padding(.horizontal, 5)
+                    .onAppear {
+                        print("UNDISCOVERD")
+                    }
             }
         }
+        
         VStack {
             HStack {
                 Text("\(animalCategory.commonLabel ?? "Unnamed animal")").font(.title)

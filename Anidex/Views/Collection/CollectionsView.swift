@@ -32,6 +32,8 @@ struct CollectionsParentView: View {
                         switch token {
                         case .discovered:
                             Text("Discovered")
+                        case .undiscovered:
+                            Text("Undiscovered")
                         case .favoriteFindings:
                             Text("Favorites")
                         case .mammalFindings:
@@ -184,6 +186,8 @@ struct CollectionsView: View {
                     switch filter {
                     case .discovered:
                         return animalCategory.isDiscovered
+                    case .undiscovered:
+                        return !animalCategory.isDiscovered
                     case .favoriteFindings:
                         return animalCategory.isFavorite
                     case .mammalFindings:
@@ -296,6 +300,7 @@ struct CollectionsView: View {
             Menu {
                 Menu {
                     Button("Discovered", action: { searchModel.tokens.append(.discovered)})
+                    Button("Undiscovered", action: { searchModel.tokens.append(.undiscovered)})
                     Button("Favorites", action: { searchModel.tokens.append(.favoriteFindings)})
                     ControlGroup("Filter by class") {
                               Button("Mammals", action: { searchModel.tokens.append(.mammalFindings)})

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4066A95E-3AA2-4CDA-B0AC-58EB71FA00ED"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8EF9968-8892-44E0-9ED8-182783E38375"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Anidex/Views/Camera/CameraView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "F8EF9968-8892-44E0-9ED8-182783E38375 - 900b28a28cb24510"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Anidex.CameraView.body.getter : some"
+                  moduleName = "Anidex"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/katya/Desktop/xcode%20projects/Anidex/Anidex/Views/Camera/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "928">
+               </Location>
+               <Location
+                  uuid = "F8EF9968-8892-44E0-9ED8-182783E38375 - 747b6a6b82f5a6de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Anidex.CameraView.body.getter : some"
+                  moduleName = "Anidex"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/katya/Desktop/xcode%20projects/Anidex/Anidex/Views/Camera/CameraView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
