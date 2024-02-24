@@ -73,7 +73,7 @@ struct ContentView: View {
                 }
             }
             
-        }
+        }.accentColor(.green)
         .onAppear {
             let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
             if !hasLaunchedBefore {

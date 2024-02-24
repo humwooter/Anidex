@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A2F1E152B89950C0073AB73 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F1E142B89950C0073AB73 /* LocationManager.swift */; };
+		4A2F1E172B8998B10073AB73 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2F1E162B8998B10073AB73 /* Extensions.swift */; };
 		4A8E80932B85D0D20032D1C0 /* AnidexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */; };
 		4A8E80952B85D0D20032D1C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80942B85D0D20032D1C0 /* Persistence.swift */; };
 		4A8E80982B85D0D20032D1C0 /* Anidex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80962B85D0D20032D1C0 /* Anidex.xcdatamodeld */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A2F1E142B89950C0073AB73 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		4A2F1E162B8998B10073AB73 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4A3609ED2B881E41006F5FFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A8E808F2B85D0D20032D1C0 /* Anidex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anidex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnidexApp.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				4A8E80B22B868C7C0032D1C0 /* CameraModel.swift */,
 				4A8E80B42B868C880032D1C0 /* ClassifierModel.swift */,
 				4A8E80C82B8696640032D1C0 /* ImagePicker.swift */,
+				4A2F1E142B89950C0073AB73 /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 				4A8E80C62B8694430032D1C0 /* HapticFeedback.swift */,
 				4AA5FA722B8838EF0073FF9E /* MediaFuncs.swift */,
 				4AA5FA742B8839BB0073FF9E /* Sighting Helpers.swift */,
+				4A2F1E162B8998B10073AB73 /* Extensions.swift */,
 			);
 			path = "Public Helpers";
 			sourceTree = "<group>";
@@ -320,7 +326,9 @@
 				4A8E80D02B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel in Sources */,
 				4A8E80B52B868C880032D1C0 /* ClassifierModel.swift in Sources */,
 				4A8E80AF2B868BB30032D1C0 /* Species+CoreDataClass.swift in Sources */,
+				4A2F1E152B89950C0073AB73 /* LocationManager.swift in Sources */,
 				4A8E80AE2B868BB30032D1C0 /* Sighting+CoreDataProperties.swift in Sources */,
+				4A2F1E172B8998B10073AB73 /* Extensions.swift in Sources */,
 				4A8E80B02B868BB30032D1C0 /* Species+CoreDataProperties.swift in Sources */,
 				4AA5FA732B8838EF0073FF9E /* MediaFuncs.swift in Sources */,
 				4A8E80C52B86924B0032D1C0 /* CameraPreview.swift in Sources */,

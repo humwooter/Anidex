@@ -75,10 +75,10 @@ struct CameraView: View {
         }
         .sheet(isPresented: $showCreationPage) {
             if let image = selectedImage {
-                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image)
+                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image).accentColor(.green)
             }
             if selectedImage == nil, let image = UIImage(data: camera.originalData) {
-                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image)
+                newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image).accentColor(.green)
             }
             
         }

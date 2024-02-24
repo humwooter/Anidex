@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 
+
 struct newAnimalSightingView: View {
     @State var showCreationPage: Bool
     @State var predictionLabels: [String]
@@ -26,23 +27,30 @@ struct newAnimalSightingView: View {
     
     var body : some View {
         NavigationStack {
-            List {
+            VStack {
+
                 animalSightingImage()
                 
-                Section(header: Text("Name")) {
-                    TextField("Name your sighting:", text: $newSightingName)
-                        .onTapGesture {
-                            focusField = true
-                        }
-                        .focused($focusField)
+                Section {
+                    GrowingTextField(text: $newSightingName, fontSize: UIFont.systemFontSize,  fontColor: UIColor.foregroundColor(background: UIColor(Color(predictionLabels[0] ?? "Mammalia"))), cursorColor: UIColor(.green)).cornerRadius(15).frame(maxHeight: 50)
+                } header: {
+                    HStack {
+                        Text("Name your sighting:").padding(.horizontal).font(.caption)
+                        Spacer()
+                    }
+                }.padding(.horizontal).padding(.vertical, 2)
 
-                }
-                Section(header: Text("Notes")) {
-                    GrowingTextField(text: $newSightingNotes, fontSize: UIFont.systemFontSize, fontColor: UIColor(Color(UIColor.label)), cursorColor: UIColor(Color(predictionLabels[0])), initialText: "Add notes about your sighting...")
-                        .frame(maxHeight: 300)
-                }
-//                    .scaledToFit()
+                Section {
+                    GrowingTextField(text: $newSightingNotes, fontSize: UIFont.systemFontSize, fontColor: UIColor.foregroundColor(background: UIColor(Color(predictionLabels[0] ?? "Mammalia"))), cursorColor: UIColor(.green), initialText: "Add notes about your sighting...").cornerRadius(15)
+                } header: {
+                    HStack {
+                        Text("Add notes:").padding(.horizontal).font(.caption)
+                        Spacer()
+                    }
+                }.padding(.horizontal).padding(.vertical, 2)
+                
             }
+//            .foregroundStyle(Color( UIColor.foregroundColor(background: UIColor(Color(predictionLabels[0] ?? "Mammalia")))))
             .navigationTitle(predictionLabels.count > 3 ? "New \(predictionLabels[4]) found" : "New \(predictionLabels[3]) found")
             .navigationBarItems(
                 leading: Button(action: {
@@ -57,9 +65,14 @@ struct newAnimalSightingView: View {
                     showCreationPage = false
                 }
             )
+            .background {
+                LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? "Mammalia"), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
+            }
         }
+        
+
+     
     }
-    
     @ViewBuilder
     func animalSightingImage() -> some View {
             VStack {
@@ -68,18 +81,14 @@ struct newAnimalSightingView: View {
 
                         Image(uiImage: selectedImage)
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                             .clipShape(Circle())
 
                     Spacer()
                 }
             }.frame(maxHeight: 300)
 //            .border(LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? ""), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-        .background {
-            LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? "Mammalia"), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-        }
-        .clipShape(Circle()).padding(40)
+
 
     }
     

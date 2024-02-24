@@ -9,11 +9,6 @@ import Foundation
 import SwiftUI
 
 
-//let adaptiveColumns = [
-//    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
-//    GridItem(.adaptive(minimum: UIScreen.main.bounds.width, maximum: UIScreen.main.bounds.width)),
-//]
-
 let adaptiveColumns = [
     GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.45, maximum: UIScreen.main.bounds.width * 0.45), spacing: 20),
     GridItem(.adaptive(minimum: UIScreen.main.bounds.width * 0.45, maximum: UIScreen.main.bounds.width * 0.45), spacing: 20)
@@ -51,8 +46,14 @@ struct CollectionsParentView: View {
                 
             }.accentColor(.green)
             .focused($isSearchFieldFocused)
+            .onChange(of: isFullscreen) { newValue in
+                          if !newValue {
+                              isSearchFieldFocused = false
+                          }
+                      }
 
     }
+    
 }
 struct CollectionsView: View {
     
@@ -222,7 +223,7 @@ struct CollectionsView: View {
                 }
                 
                 Button {
-                    searchModel.tokens.append(.favoriteFindings)
+                    searchModel.tokens.append(.discovered)
                 } label: {
                     HStack {
                         Image(systemName: "eye.fill")
@@ -294,15 +295,13 @@ struct CollectionsView: View {
             Spacer()
             Menu {
                 Menu {
-                    Button("All", action: { selectedFilter = .all })
-                    Button("Discovered", action: { selectedFilter = .discovered })
-                    Button("Undiscovered", action: { selectedFilter = .undiscovered })
-                    Button("Favorites", action: { selectedFilter = .favorite })
+                    Button("Discovered", action: { searchModel.tokens.append(.discovered)})
+                    Button("Favorites", action: { searchModel.tokens.append(.favoriteFindings)})
                     ControlGroup("Filter by class") {
-                              Button("Mammals", action: { selectedFilter = .mammal })
-                              Button("Reptiles", action: { selectedFilter = .reptile })
-                              Button("Birds (Aves)", action: { selectedFilter = .aves })
-                              Button("Amphibians", action: { selectedFilter = .amphibia })
+                              Button("Mammals", action: { searchModel.tokens.append(.mammalFindings)})
+                              Button("Reptiles", action: { searchModel.tokens.append(.reptiliaFindings)})
+                              Button("Birds (Aves)", action: { searchModel.tokens.append(.avesFindings)})
+                              Button("Amphibians", action: { searchModel.tokens.append(.amphibiaFindings)})
                     }
                 } label: {
                     Text("Filter")

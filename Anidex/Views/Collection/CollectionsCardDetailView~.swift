@@ -38,10 +38,10 @@ struct CollectionsCardDetailView: View {
                     TabView(selection: $selectedIndex) {
       
                             
-//                           aboutView() .tabItem {
-//                                Label("About", systemImage: "pawprint.fill")
-//                            }.tag(0)
-//                        
+                           aboutView() .tabItem {
+                                Label("About", systemImage: "pawprint.fill")
+                            }.tag(0)
+                        
                         StatsView(species: animalCategory).tabItem {
                             Label("Stats", systemImage: "chart.bar.fill")
                         }.tag(1)
