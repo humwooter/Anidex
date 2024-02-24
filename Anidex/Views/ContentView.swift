@@ -22,6 +22,10 @@ struct ContentView: View {
     
     @State private var endOffset:CGFloat = 0
     @ObservedObject private var userPreferences = UserPreferences()
+    @ObservedObject private var locationManager = LocationManager()
+    
+    private var coreDataManager = CoreDataManager(persistenceController: PersistenceController.shared)
+
     
     
     var body : some View {
@@ -41,11 +45,14 @@ struct ContentView: View {
                     
                     
                     CameraView(camera: camera)
+                        .environmentObject(coreDataManager)
                         .environmentObject(userPreferences)
+                        .environmentObject(locationManager)
                     
                     
                     
                     CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
+                        .environmentObject(coreDataManager)
                         .offset(y: isFullscreen ? 0 : getCollectionsViewOffset(startingOffsetY: startingOffsetY + safeAreaBottom))
                         .frame(height: isFullscreen ? totalHeight : nil) // Full height if fullscreen
                         .gesture(

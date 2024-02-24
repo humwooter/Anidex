@@ -24,10 +24,12 @@ struct CollectionsParentView: View {
     @Binding var isFullscreen: Bool
     @StateObject private var searchModel = SearchModel()
     @FocusState private var isSearchFieldFocused: Bool
+    @EnvironmentObject var coreDataManager: CoreDataManager
+
 
     
     var body : some View {
-        CollectionsView(isFullscreen: $isFullscreen, searchModel: searchModel)
+        CollectionsView(isFullscreen: $isFullscreen, searchModel: searchModel).environmentObject(coreDataManager)
             .searchable(text: $searchModel.searchText, tokens: $searchModel.tokens) { token in
                         switch token {
                         case .discovered:
@@ -61,6 +63,7 @@ struct CollectionsView: View {
     
     
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var coreDataManager: CoreDataManager
     @Environment(\.colorScheme) var colorScheme
     
     //Fetch Requests

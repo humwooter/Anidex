@@ -44,3 +44,7 @@ extension UIColor {
         return brightness > 0.5 ? UIColor.black : UIColor.white
     }
 }
+
+extension CodingUserInfoKey {
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}

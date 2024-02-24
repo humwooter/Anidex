@@ -36,12 +36,12 @@ struct CollectionsCardDetailView: View {
                     
                     
                     TabView(selection: $selectedIndex) {
-      
-                            
-                           aboutView() .tabItem {
-                                Label("About", systemImage: "pawprint.fill")
-                            }.tag(0)
-//                        
+                        
+                        
+                        aboutView() .tabItem {
+                            Label("Sightings", systemImage: "pawprint.fill")
+                        }.tag(0)
+                        //                        
                         StatsView(species: animalCategory).tabItem {
                             Label("Stats", systemImage: "chart.bar.fill")
                         }.tag(1)
@@ -53,10 +53,10 @@ struct CollectionsCardDetailView: View {
                     }.accentColor(Color(animalCategory.classLabel ?? "Mammalia"))
                 }
             }
-
-
+            
+            
             .navigationTitle("\(animalCategory.commonLabel ?? "")")
-
+            
             .toolbar {
                 // Back button
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -66,7 +66,7 @@ struct CollectionsCardDetailView: View {
                         Image(systemName: "arrow.backward").foregroundColor(.white)
                     }
                 }
-
+                
                 // Heart button
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -81,11 +81,52 @@ struct CollectionsCardDetailView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     func aboutView() -> some View {
-        Section(header: Text("Name")) {
-            Text("wurd")
+        List {
+            if let sightingsSet = animalCategory.relationship as? Set<Sighting> {
+                let sightingsArray = Array(sightingsSet).sorted {
+                    ($0.timestamp ?? Date()) < ($1.timestamp ?? Date())
+                }
+                
+                ForEach(sightingsArray, id: \.self) { sighting in
+                    sightingNote(sighting: sighting)
+                }
+            }
         }
+    }
+    
+    
+    
+    @ViewBuilder
+    func sightingNote(sighting: Sighting) -> some View {
+        Section {
+            if  let notes = sighting.notes{
+                Text(notes)
+            }
+        } header: {
+            HStack{
+                if let name = sighting.name, !name.isEmpty {
+                    Text("Named: \(name)")
+                }
+                Spacer()
+                if  sighting.lattitude != 0 && sighting.longitude != 0 {
+                    Text("\(formatLocation(latitude: sighting.lattitude, longitude: sighting.longitude))")
+                        .foregroundStyle(.green)
+                }
+            }
+        } footer: {
+            HStack {
+                if let date = sighting.timestamp {
+                    Text("Spotted on \(formatShortDate(date: date))")
+                }
+                Spacer()
+            
+                
+            }
+        }
+        
+        
     }
 }

@@ -24,7 +24,8 @@ struct newAnimalSightingView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @FocusState private var focusField: Bool
-    
+    @EnvironmentObject var locationManager: LocationManager
+
     var body : some View {
         NavigationStack {
             VStack {
@@ -61,7 +62,6 @@ struct newAnimalSightingView: View {
                 trailing: Button("Save") {
                     createNewSighting()
 
-                    // TODO: create new photo entry here
                     showCreationPage = false
                 }
             )
@@ -87,7 +87,6 @@ struct newAnimalSightingView: View {
                     Spacer()
                 }
             }.frame(maxHeight: 300)
-//            .border(LinearGradient(gradient: Gradient(colors: [Color(predictionLabels[0] ?? ""), Color(predictionLabels[1] ?? "Mammalia")]), startPoint: .top, endPoint: .bottom), width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
 
 
     }
@@ -102,12 +101,16 @@ struct newAnimalSightingView: View {
         newSighting.notes = newSightingNotes
         
 
-//        Task {
-//            locationManager.requestLocation()
-//
-//        }
-////        newSighting.lattitude = locationManager.location?.latitude ?? 0
-//        newSighting.longitude = locationManager.location?.longitude ?? 0
+        Task {
+            locationManager.requestLocation()
+
+        }
+        newSighting.lattitude = locationManager.location?.latitude ?? 0
+        newSighting.longitude = locationManager.location?.longitude ?? 0
+        
+        print("lattitude: \(newSighting.lattitude )")
+        print("longitude: \(newSighting.longitude )")
+
         
 
         

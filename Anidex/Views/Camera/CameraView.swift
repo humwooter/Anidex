@@ -15,41 +15,71 @@ struct CameraView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var camera: CameraModel
     @State private var selectedImage: UIImage?
-
+    
     @State private var isShowingImagePicker = false
     
     @State private var showAlert = false
     @State private var showCreationPage = false
+    @State private var showProfileView = false
+    @State private var showMapView = false
+    
+    
     @EnvironmentObject var userPreferences: UserPreferences
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var coreDataManager: CoreDataManager
 
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.black).ignoresSafeArea(.all, edges: .all)
                 CameraPreview(camera: camera, selectedImage: $selectedImage)
                     .ignoresSafeArea(.all, edges: .all)
+                    .gesture(
+                        DragGesture(minimumDistance: 50, coordinateSpace: .local)
+                            .onEnded { value in
+                                let horizontalMovement = value.translation.width
+                                let verticalMovement = value.translation.height
+                                
+                                // Check for predominantly horizontal movement
+                                if abs(horizontalMovement) > abs(verticalMovement) {
+                                    // Right swipe
+                                    if horizontalMovement > 0 {
+                                        showMapView = true
+                                    }
+                                }
+                            }
+                    )
                     .onTapGesture(count: 2) {
                         if (!camera.isTaken) {
                             camera.toggleCamera()
                         }
                     }
                     .overlay {
-                      VStack {
-                        ForEach(0..<7) {_ in
-                          Spacer()
+                        VStack {
+                            ForEach(0..<7) {_ in
+                                Spacer()
+                            }
+                            buttonBar_horizontal()
+                            Spacer()
                         }
-                        buttonBar_horizontal()
-                        Spacer()
-                      }
                     }
-                    buttonBar_vertical()
+                if !camera.isTaken {
+                    buttonBar_top()
+                } else {
+                    buttonBar_vertical().padding(.top, 40)
+                }
+                
+                if showMapView {
+                    MapView(showMapView: $showMapView) // Your custom MapView
+                        .transition(.move(edge: .leading))
+                }
             }
-       
-        
-    }
+
+        }
         .onAppear(perform: {
+            camera.checkPermissions()
             if !userPreferences.hasCameraAccess {
-                camera.checkPermissions()
                 userPreferences.hasCameraAccess = true
             }
         })
@@ -69,31 +99,64 @@ struct CameraView: View {
         } message: {
             Text("Prediction: \(!camera.classifierModel.commonName.isEmpty ? camera.classifierModel.commonName : camera.classifierModel.scientificName) \nConfidence: \(camera.classifierModel.confidenceLabel)")
                 .foregroundColor(.green)
-             
+            
         }
         .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
             ImagePicker(selectedImage: self.$selectedImage, sourceType: .photoLibrary)
         }
+        .sheet(isPresented: $showProfileView) {
+            SettingsView()
+                .environmentObject(userPreferences)
+        }
+
         .sheet(isPresented: $showCreationPage) {
             if let image = selectedImage {
                 newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image).accentColor(.green)
+                    .environmentObject(locationManager)
             }
             if selectedImage == nil, let image = UIImage(data: camera.originalData) {
                 newAnimalSightingView(showCreationPage: showCreationPage, predictionLabels:[camera.classifierModel.phylumName, camera.classifierModel.className, camera.classifierModel.familyName, camera.classifierModel.scientificName, camera.classifierModel.commonName], selectedImage: image).accentColor(.green)
+                    .environmentObject(locationManager)
             }
             
         }
-}
-
-func loadImage() {
-    guard let selectedImage = selectedImage else { return }
-    guard let imageData = selectedImage.jpegData(compressionQuality: 1.0) else { return }
-    camera.processImageData(imageData, shouldClassify: true)
-    camera.isTaken = true
-}
-
+    }
     
-@ViewBuilder
+    
+    func loadImage() {
+        guard let selectedImage = selectedImage else { return }
+        guard let imageData = selectedImage.jpegData(compressionQuality: 1.0) else { return }
+        camera.processImageData(imageData, shouldClassify: true)
+        camera.isTaken = true
+    }
+    
+    @ViewBuilder
+    func buttonBar_top() -> some View {
+        HStack {
+            VStack {
+                Button {
+                    showProfileView = true
+                } label: {
+                    Image(systemName:  "person.crop.circle")
+                        .foregroundColor(.white)
+                        .padding(15)
+                        .frame(width: 50, height: 50)
+                        .background(.white.opacity(0.1))
+                        .clipShape(Circle())
+                }.shadow(radius:2)
+                Spacer()
+            }
+            Spacer()
+            buttonBar_vertical()
+        }
+        
+        .padding(.trailing, 10)
+        .padding(.leading, 25)
+        .padding(.top, 40)
+    }
+    
+    
+    @ViewBuilder
     func buttonBar_vertical() -> some View {
         VStack {
             
@@ -145,7 +208,7 @@ func loadImage() {
                         }).shadow(radius:2)
                         Spacer()
                     }.padding(.trailing, 15)
-                        .padding(.top, 25)
+                    //                        .padding(.top, 25)
                     
                 }
                 
@@ -169,8 +232,8 @@ func loadImage() {
                                 .clipShape(Circle())
                             
                         }).shadow(radius:2)
-
-    
+                        
+                        
                         Spacer()
                     }
                     Spacer()
@@ -201,79 +264,78 @@ func loadImage() {
                 }
                 .padding(.trailing, 10)
                 .padding(.leading, 25)
-                .padding(.top, 25)
+                //                .padding(.top, 25)
             }
         }
     }
-        
-        
-@ViewBuilder
-func buttonBar_horizontal() -> some View {
-    HStack(spacing: 25) {
-        
-        if camera.isTaken {
-            Button(action: {
-                vibration_medium.prepare()
-                vibration_medium.impactOccurred()
-                camera.savePic()
-                
-            }, label: {
-                Image(systemName: camera.isSaved ? "arrow.down.square.fill" : "arrow.down.square")
-                    .foregroundColor(.white)
-                    .padding(15)
-                    .padding(.horizontal, 5)
-                    .background(camera.isSaved ? .green : .white.opacity(0.3))
-                    .clipShape(Circle())
-            }).padding(.leading, 25)
-            Spacer()
-        }
-        else {
-            Button(action: {
-                camera.takePic()
-                selectedImage = UIImage(data: camera.originalData)
-            }, label: {
-                VStack {
-                    ZStack {
-                        HStack(spacing: 30) {
-                            //
-                            //                                Button(action: {
-                            //                                    withAnimation {
-                            //                                        showMapView = true
-                            //                                    }
-                            //                                }) {
-                            //                                    Image(systemName: "map") // Map icon
-                            //                                        .foregroundColor(.white)
-                            //                                        .frame(width: 50, height: 50)
-                            //
-                            //                                }
-                            
-                            Circle()
-                                .stroke(Color.white, lineWidth: 7)
-                                .frame(width: 65, height: 65)
-                                .shadow(radius: 2)
-                            
-                            
-//                            if !camera.isTaken {
-//                                Button(action: {
-//                                    self.isShowingImagePicker = true
-//                                    self.selectedImage = nil
-//                                }, label: {
-//                                    Image(systemName: "photo.on.rectangle.angled")
-//                                        .foregroundColor(.white)
-//                                    //                                                        .padding(15)
-//                                        .frame(width: 50, height: 50)
-//                                    
-//                                }).shadow(radius:2)
-//                            }
+    
+    
+    @ViewBuilder
+    func buttonBar_horizontal() -> some View {
+        HStack(spacing: 25) {
+            
+            if camera.isTaken {
+                Button(action: {
+                    vibration_medium.prepare()
+                    vibration_medium.impactOccurred()
+                    camera.savePic()
+                    
+                }, label: {
+                    Image(systemName: camera.isSaved ? "arrow.down.square.fill" : "arrow.down.square")
+                        .foregroundColor(.white)
+                        .padding(15)
+                        .padding(.horizontal, 5)
+                        .background(camera.isSaved ? .green : .white.opacity(0.3))
+                        .clipShape(Circle())
+                }).padding(.leading, 25)
+                Spacer()
+            }
+            else {
+                Button(action: {
+                    camera.takePic()
+                    selectedImage = UIImage(data: camera.originalData)
+                }, label: {
+                    VStack {
+                        ZStack {
+                            HStack(spacing: 30) {
+                                
+                                Button(action: {
+                                    withAnimation {
+                                        showMapView = true
+                                    }
+                                }) {
+                                    Image(systemName: "map") // Map icon
+                                        .foregroundColor(.white)
+                                        .frame(width: 50, height: 50)
+                                    
+                                }
+                                
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 7)
+                                    .frame(width: 65, height: 65)
+                                    .shadow(radius: 2)
+                                
+                                
+                                if !camera.isTaken {
+                                    Button(action: {
+                                        self.isShowingImagePicker = true
+                                        self.selectedImage = nil
+                                    }, label: {
+                                        Image(systemName: "photo.on.rectangle.angled")
+                                            .foregroundColor(.white)
+                                            .frame(width: 50, height: 50)
+                                        
+                                    }).shadow(radius:2)
+                                }
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
     }
 }
-}
-    
+
 
 
 

@@ -42,6 +42,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     
     
     func setUp() {
+        print("entered setup")
         do {
             self.session.beginConfiguration()
             for input in self.session.inputs {
@@ -137,6 +138,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     
     
     func checkPermissions() {
+        print("entered checkPermissions")
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             setUp()
