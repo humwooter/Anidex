@@ -8,6 +8,41 @@
 import SwiftUI
 import CoreData
 
+//struct ContentView: View {
+//    
+//    @Environment(\.managedObjectContext) private var viewContext
+//    @StateObject var camera = CameraModel()
+//    @State private var panelHeight: CGFloat = 100 // Minimized height
+//    @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.85
+//    
+//    @State var currentDragOffsetY: CGFloat = .zero
+//    @State var endingOffsetY: CGFloat = .zero
+//    @State private var isFullscreen = false
+//    @State var inCameraMode: Bool = true;
+//    @Environment(\.scenePhase) var scenePhase
+//    
+//    @State private var endOffset:CGFloat = 0
+//    @ObservedObject private var userPreferences = UserPreferences()
+//    @ObservedObject private var locationManager = LocationManager()
+//    
+//    private var coreDataManager = CoreDataManager(persistenceController: PersistenceController.shared)
+//    
+//    var body : some View {
+//        VStack {
+//            GeometryReader { geometry in
+////                CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
+////                    .environmentObject(coreDataManager)
+//                CameraViewDemo()
+//                    .environmentObject(coreDataManager)
+//                    .environmentObject(userPreferences)
+//                    .environmentObject(locationManager)
+//                Text("Hi")
+//            }
+//        }
+//        
+//    }
+//}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var camera = CameraModel()
@@ -22,7 +57,7 @@ struct ContentView: View {
     
     @State private var endOffset:CGFloat = 0
     @ObservedObject private var userPreferences = UserPreferences()
-    @ObservedObject private var locationManager = LocationManager()
+//    @ObservedObject private var locationManager = LocationManager()
     
     private var coreDataManager = CoreDataManager(persistenceController: PersistenceController.shared)
 
@@ -30,6 +65,7 @@ struct ContentView: View {
     
     var body : some View {
         VStack {
+//            Color(.green).ignoresSafeArea(.all, edges: .all)
             GeometryReader { geometry in
                 let totalHeight = geometry.size.height
                 let safeAreaBottom = geometry.safeAreaInsets.bottom
@@ -44,10 +80,10 @@ struct ContentView: View {
                     Color(.black).ignoresSafeArea(.all, edges: .all)
                     
                     
-                    CameraView(camera: camera)
+//                    CameraView(camera: camera)
+                    CameraViewDemo()
                         .environmentObject(coreDataManager)
                         .environmentObject(userPreferences)
-                        .environmentObject(locationManager)
                     
                     
                     

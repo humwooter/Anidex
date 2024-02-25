@@ -16,6 +16,7 @@
 		4A4B6B832B8A934C00700179 /* Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B6B822B8A934C00700179 /* Documents.swift */; };
 		4A4B6B862B8A937000700179 /* SpeciesBackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B6B852B8A937000700179 /* SpeciesBackupView.swift */; };
 		4A4B6B882B8A969900700179 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B6B872B8A969900700179 /* CoreDataManager.swift */; };
+		4A4B6B8C2B8AF52100700179 /* CameraViewDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4B6B8B2B8AF52100700179 /* CameraViewDemo.swift */; };
 		4A8E80932B85D0D20032D1C0 /* AnidexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */; };
 		4A8E80952B85D0D20032D1C0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80942B85D0D20032D1C0 /* Persistence.swift */; };
 		4A8E80982B85D0D20032D1C0 /* Anidex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A8E80962B85D0D20032D1C0 /* Anidex.xcdatamodeld */; };
@@ -65,6 +66,8 @@
 		4A4B6B822B8A934C00700179 /* Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Documents.swift; sourceTree = "<group>"; };
 		4A4B6B852B8A937000700179 /* SpeciesBackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesBackupView.swift; sourceTree = "<group>"; };
 		4A4B6B872B8A969900700179 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		4A4B6B8A2B8AEE0600700179 /* Anidex Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Anidex Playground.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		4A4B6B8B2B8AF52100700179 /* CameraViewDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewDemo.swift; sourceTree = "<group>"; };
 		4A8E808F2B85D0D20032D1C0 /* Anidex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anidex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8E80922B85D0D20032D1C0 /* AnidexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnidexApp.swift; sourceTree = "<group>"; };
 		4A8E80942B85D0D20032D1C0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		4A8E80862B85D0D10032D1C0 = {
 			isa = PBXGroup;
 			children = (
+				4A4B6B8A2B8AEE0600700179 /* Anidex Playground.playground */,
 				4AFA806A2B88926100EF9DCB /* AnimalLabels.txt */,
 				4A8E80CB2B86D64F0032D1C0 /* AmphibiaClassifier.mlmodel */,
 				4A8E80CD2B86D64F0032D1C0 /* AvesClassifier.mlmodel */,
@@ -252,6 +256,7 @@
 			children = (
 				4A8E80B82B8690CD0032D1C0 /* CameraView.swift */,
 				4A8E80C42B86924A0032D1C0 /* CameraPreview.swift */,
+				4A4B6B8B2B8AF52100700179 /* CameraViewDemo.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				4A4B6B812B8A916E00700179 /* SettingsView.swift in Sources */,
 				4AA5FA6F2B8834150073FF9E /* CustomAsyncImageView.swift in Sources */,
 				4A8E80D12B86D64F0032D1C0 /* MammalClassifier.mlmodel in Sources */,
+				4A4B6B8C2B8AF52100700179 /* CameraViewDemo.swift in Sources */,
 				4A2F1E192B89A0620073AB73 /* UserPreferences.swift in Sources */,
 				4A4B6B7F2B8A87FD00700179 /* MapView.swift in Sources */,
 				4A8E80C92B8696640032D1C0 /* ImagePicker.swift in Sources */,
