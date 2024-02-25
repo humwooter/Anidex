@@ -11,7 +11,9 @@ import UIKit
 
 struct CameraViewDemo: View {
     @Environment(\.colorScheme) var colorScheme
+    @State private var selectedData: Data?
     @State private var selectedImage: UIImage?
+
     @State private var isShowingImagePicker = false
     @State private var showCreationPage = false
     @State private var showProfileView = false
@@ -22,16 +24,39 @@ struct CameraViewDemo: View {
     @EnvironmentObject var coreDataManager: CoreDataManager
     
     
-    
+//    @State private var animalImages: [UIImage] = [UIImage(named: "animal_\(i)") , ] //demo photo library
+    @State private var animalImages: [Image] = [Image("animal_1"), Image("animal_2"), Image("animal_3"),Image("animal_4"), Image("animal_5"), Image("animal_6"), Image("animal_7")]
     
     //placeholder variables to mimic the real functionality
     @State private var cameraIsTaken = false
     @State private var cameraIsSaved = false
+    @State private var showClassification = false
+    @State private var showAlert = false
+    @State private var isProcessing = false
+    @State private var showClassificationAlert = false
+    @State private var cameraIsProcessing = false
+
+    @ObservedObject var classifierModel = ClassifierModel()
+    @State private var predictions: [String] = []
+    
+    @State private var confidenceLabel = ""
+    
+ 
+
+//    init() {
+//        for i in 1...7 {
+//            if let image = UIImage(named: "animal_\(i)") {
+//                animalImages.append(image)
+//            }
+//        }
+//    }
+    
 
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.black).ignoresSafeArea(.all, edges: .all)
+                CameraPreviewDemo(selectedImage: $selectedImage)
                     .overlay {
                         VStack {
                             VStack {
@@ -45,15 +70,25 @@ struct CameraViewDemo: View {
                     }
                 
                     buttonBar_vertical().padding(.top, 40)
-
-//                if showMapView {
-//                    MapView(showMapView: $showMapView) // Your custom MapView
-//                        .transition(.move(edge: .leading))
-//                }
             }
         }
-        .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
-            ImagePicker(selectedImage: self.$selectedImage, sourceType: .photoLibrary)
+        .sheet(isPresented: $isShowingImagePicker) {
+            ImagePickerDemoView()
+  
+//            ImagePicker(selectedImage: self.$selectedImage, sourceType: .photoLibrary)
+        }
+        .alert("Classification Result", isPresented: $showClassificationAlert) {
+            Button("Save", role: .cancel) {
+                showAlert = false
+                showCreationPage = true
+            }
+            Button("Dismiss", role: .destructive) {
+                showAlert = false
+            }
+        } message: {
+            Text("Prediction: \(predictions.count > 0 ? predictions.last! : "") \nConfidence: \(self.confidenceLabel)")
+                .foregroundColor(.green)
+            
         }
         .sheet(isPresented: $showProfileView) {
             SettingsView()
@@ -61,29 +96,27 @@ struct CameraViewDemo: View {
         }
         .sheet(isPresented: $showCreationPage) {
             if let image = selectedImage {
+                newAnimalSightingViewDemo(showCreationPage: showCreationPage, predictionLabels: self.predictions, selectedImage: image).accentColor(.green)
                 // Your code for newAnimalSightingView
             }
         }
     }
-    
-    func loadImage() {
-        guard let selectedImage = selectedImage else { return }
-        guard let _ = selectedImage.jpegData(compressionQuality: 1.0) else { return }
-        // Process the image data if needed
-    }
+
     
     @ViewBuilder
     func buttonBar_vertical() -> some View {
         VStack {
             
+            if !cameraIsTaken {
+                
                 HStack {
                     Spacer()
                     VStack(alignment: .trailing) {
                         
                         Button {
-                                withAnimation {
-                                    vibration_medium.impactOccurred()
-                                }
+                            withAnimation {
+                                vibration_medium.impactOccurred()
+                            }
                             
                         } label: {
                             Image(systemName: "arrow.triangle.2.circlepath.camera.fill" )
@@ -107,7 +140,7 @@ struct CameraViewDemo: View {
                         
                         Button(action: {
                             self.isShowingImagePicker = true
-                            self.selectedImage = nil
+                            self.selectedData = nil
                         }, label: {
                             Image(systemName: "photo.on.rectangle.angled")
                                 .foregroundColor(.white)
@@ -119,8 +152,77 @@ struct CameraViewDemo: View {
                         Spacer()
                     }.padding(.trailing, 15)
                 }
+            }
+            else {
+                HStack(spacing: 10) {
+                    VStack {
+                        Button(action: {
+                            vibration_light.prepare()
+                            vibration_light.impactOccurred()
+                            cameraIsTaken = false
+                        }, label: {
+                            
+                            Image(systemName: "arrowshape.backward.fill")
+                                .foregroundColor(.white)
+                                .padding(15)
+                                .padding(.horizontal, 5)
+                                .background(.white.opacity(0.3))
+                                .clipShape(Circle())
+                            
+                        }).shadow(radius:2)
+                        
+                        
+                        Spacer()
+                    }
+                    Spacer()
+                    
+                    if cameraIsTaken {
+                        VStack {
+                            if isProcessing {
+                                ProgressView().progressViewStyle(.circular).padding(15)
+                            } else {
+                                Text(predictions.count  > 0 ?  predictions[4] : "No name")
+                                    .font(.footnote)
+                                    .padding(15)
+                                    .background(Capsule().fill(Color.white.opacity(0.8)).overlay(Capsule().stroke(colorForConfidence(confidenceString: self.confidenceLabel), lineWidth: 3)))
+                                
+                                    .foregroundColor(colorForConfidence(confidenceString: self.confidenceLabel))
+                                    .padding(.horizontal, 5)
+                                    .contextMenu {
+                                        Button(action: {
+                                            UIPasteboard.general.string = predictions[6]
+                                        }) {
+                                            Text("Copy Message")
+                                            Image(systemName: "doc.on.doc")
+                                        }
+                                    }
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+                .padding(.trailing, 10)
+                .padding(.leading, 25)
+            }
         }
     }
+    
+    func parseLabel(label: String) {
+        let components = label.split(separator: "_").map(String.init)
+        if components.count >= 7 {
+//            let kingdomName = components[0]
+
+            let phylumName = components[1]
+            let className = components[2]
+            let familyName = components[4]
+            let scientificName = "\(components[5]) \(components[6])"
+            let commonName = components.dropFirst(7).joined(separator: " ")
+            
+            self.predictions = [phylumName, className, familyName, scientificName, commonName]
+            print("self.predictions: \(self.predictions)")
+        }
+    }
+    
 
     @ViewBuilder
     func buttonBar_horizontal() -> some View {
@@ -172,7 +274,7 @@ struct CameraViewDemo: View {
                                 
                                     Button(action: {
                                         self.isShowingImagePicker = true
-                                        self.selectedImage = nil
+                                        self.selectedData = nil
                                     }, label: {
                                         Image(systemName: "photo.on.rectangle.angled")
                                             .foregroundColor(.white)
@@ -187,4 +289,87 @@ struct CameraViewDemo: View {
     
         }
     }
+    
+//    func processImageData(_ imageData: Data) {
+//        print("ENTERED PROCESS IMAGE DATA")
+//        self.selectedData = imageData
+//        if let uiImage = UIImage(data: imageData) {
+//            self.classifierModel.classify(image: uiImage) {
+//                self.isProcessing = false
+//                print("Prediction: \(self.classifierModel.predictionLabel)")
+//                parseLabel(label: self.classifierModel.predictionLabel)
+////                self.predictions = self.classifierModel.predictionLabel.split(separator: "_").map { String($0) }
+//                self.confidenceLabel = self.classifierModel.confidenceLabel
+//                self.showClassificationAlert = true
+//                self.cameraIsTaken = true
+//            }
+//        }
+//    }
+//    
+    func processImageData(_ imageData: Data) {
+        print("ENTERED PROCESS IMAGE DATA")
+        print("IMAGE DATA \(imageData)")
+        self.selectedData = imageData
+        if let uiImage = UIImage(data: imageData) {
+            Task {
+                await self.classifierModel.classifyForDemo(image: uiImage) {
+                    self.isProcessing = false
+                    print("Prediction: \(self.classifierModel.predictionLabel)")
+                    parseLabel(label: self.classifierModel.predictionLabel)
+                    self.confidenceLabel = self.classifierModel.confidenceLabel
+                    self.showClassificationAlert = true
+                    self.cameraIsTaken = true
+
+                }
+//                self.isProcessing = false
+//                print("Prediction: \(self.classifierModel.predictionLabel)")
+//                parseLabel(label: self.classifierModel.predictionLabel)
+//                self.confidenceLabel = self.classifierModel.confidenceLabel
+                // Now you can safely update UI or state variables here if needed
+                // Remember to switch to the main thread if updating any @Published properties or state variables that affect the UI
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func ImagePickerDemoView() -> some View {
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                    ForEach(1...7, id: \.self) { index in
+                        Image("animal_\(index)")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+//                            .cornerRadius(70)
+                            .onTapGesture {
+                                
+                                selectedData  = nil
+                                selectedImage = nil
+                                if let imageData =  UIImage(named: "animal_\(index)")?.pngData() {
+                                    print("IT WORKED!")
+                                    selectedData = imageData
+                                    
+                                    processImageData(imageData)
+                                    if let image = UIImage(named: "animal_\(index)"){
+                                        selectedImage = image
+                                        isShowingImagePicker = false
+                                    }
+                                }
+                                
+                            }
+                    }
+                }
+            }
+            .navigationTitle("Image Library Demo")
+        }
+    }
+//    private mutating func loadImages() {
+//        for i in 1...7 {
+//            if let image = UIImage(named: "animal_\(i)") {
+//                animalImages.append(image)
+//            }
+//        }
+//    }
 }
+

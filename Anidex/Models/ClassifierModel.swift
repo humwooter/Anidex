@@ -47,6 +47,11 @@ class ClassifierModel: NSObject, ObservableObject {
         self.chordataClassClassifier = visionChordataModel
         super.init()
         self.chordataClassRequest = VNCoreMLRequest(model: chordataClassClassifier, completionHandler: handleChordataClassification)
+
+        // Set usesCPUOnly for simulator
+        #if targetEnvironment(simulator)
+        self.chordataClassRequest?.usesCPUOnly = true
+        #endif
     }
     
     private func createSpecificClassifier(forClass className: String) -> VNCoreMLModel? {
@@ -78,6 +83,39 @@ class ClassifierModel: NSObject, ObservableObject {
                 try handler.perform([specificRequest])
             } catch {
                 print("Failed to perform specific classification: \(error)")
+            }
+        }
+    }
+    
+    func classifyForDemo(image: UIImage, completion: @escaping () -> Void) async{
+        self.currentImage = image // Save the current image
+        guard let chordataRequest = chordataClassRequest, let ciImage = CIImage(image: image) else { return }
+
+        let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
+        visionQueue.async {
+            do {
+                // Perform Chordata Classification
+                try handler.perform([chordataRequest])
+                
+                // Handle Chordata Classification Result
+                if let bestResult = self.processChordataClassificationResults(request: chordataRequest),
+                   let specificClassifier = self.createSpecificClassifier(forClass: bestResult) {
+                    
+                    
+                    print("BEST RESULT: \(bestResult)")
+                    
+                    // Create and perform Specific Classification
+                    self.speciesClassificationRequest = VNCoreMLRequest(model: specificClassifier, completionHandler: self.handleSpecificClassification)
+                    if let specificRequest = self.speciesClassificationRequest {
+                        try handler.perform([specificRequest])
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    completion()
+                }
+            } catch {
+                print("Failed to perform classification: \(error)")
             }
         }
     }
@@ -160,8 +198,19 @@ extension ClassifierModel {
         DispatchQueue.main.async {
             self.specificClassClassifier = self.createSpecificClassifier(forClass: className)
             self.speciesClassificationRequest = self.specificClassClassifier.flatMap {
-                VNCoreMLRequest(model: $0, completionHandler: self.handleSpecificClassification)
+                let request = VNCoreMLRequest(model: $0, completionHandler: self.handleSpecificClassification)
+
+                // Set usesCPUOnly for simulator
+                #if targetEnvironment(simulator)
+                request.usesCPUOnly = true
+                #endif
+
+                return request
             }
+//
+//            self.speciesClassificationRequest = self.specificClassClassifier.flatMap {
+//                VNCoreMLRequest(model: $0, completionHandler: self.handleSpecificClassification)
+//            }
             self.classifyWithSpecificClassifier(image: currentImage)
         }
     }

@@ -1,49 +1,15 @@
 //
-//  ContentView.swift
+//  ContentViewDemo.swift
 //  Anidex
 //
-//  Created by Katyayani G. Raman on 2/20/24.
+//  Created by Katyayani G. Raman on 2/25/24.
 //
 
+import Foundation
 import SwiftUI
 import CoreData
 
-//struct ContentView: View {
-//    
-//    @Environment(\.managedObjectContext) private var viewContext
-//    @StateObject var camera = CameraModel()
-//    @State private var panelHeight: CGFloat = 100 // Minimized height
-//    @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.85
-//    
-//    @State var currentDragOffsetY: CGFloat = .zero
-//    @State var endingOffsetY: CGFloat = .zero
-//    @State private var isFullscreen = false
-//    @State var inCameraMode: Bool = true;
-//    @Environment(\.scenePhase) var scenePhase
-//    
-//    @State private var endOffset:CGFloat = 0
-//    @ObservedObject private var userPreferences = UserPreferences()
-//    @ObservedObject private var locationManager = LocationManager()
-//    
-//    private var coreDataManager = CoreDataManager(persistenceController: PersistenceController.shared)
-//    
-//    var body : some View {
-//        VStack {
-//            GeometryReader { geometry in
-////                CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
-////                    .environmentObject(coreDataManager)
-//                CameraViewDemo()
-//                    .environmentObject(coreDataManager)
-//                    .environmentObject(userPreferences)
-//                    .environmentObject(locationManager)
-//                Text("Hi")
-//            }
-//        }
-//        
-//    }
-//}
-
-struct ContentView: View {
+struct ContentViewDemo: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var camera = CameraModel()
     @State private var panelHeight: CGFloat = 100 // Minimized height
