@@ -54,6 +54,47 @@ class ClassifierModel: NSObject, ObservableObject {
         #endif
     }
     
+    func setupLifecycleNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAppDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAppWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+    
+    @objc private func handleAppDidEnterBackground() {
+        #if targetEnvironment(simulator)
+        updateModelForBackground()
+        #endif
+    }
+
+    @objc private func handleAppWillEnterForeground() {
+        #if targetEnvironment(simulator)
+        updateModelForForeground()
+        #endif
+    }
+    
+    private func updateModelForBackground() {
+        // Example for updating one of the models, repeat for others as needed
+        let config = MLModelConfiguration()
+        config.computeUnits = .cpuOnly // Force model to use CPU only in the simulator
+        updateChordataClassModel(with: config)
+    }
+
+    private func updateModelForForeground() {
+        // Example for reverting the update, repeat for others as needed
+        let config = MLModelConfiguration() // Default configuration
+        updateChordataClassModel(with: config)
+    }
+
+    private func updateChordataClassModel(with config: MLModelConfiguration) {
+        guard let newModel = try? ChordataClassClassifier(configuration: config),
+              let visionModel = try? VNCoreMLModel(for: newModel.model) else {
+            fatalError("Could not update ChordataClass model configuration.")
+        }
+        self.chordataClassClassifier = visionModel
+        // Update the request as well
+        self.chordataClassRequest = VNCoreMLRequest(model: visionModel, completionHandler: handleChordataClassification)
+        // Note: You might need to reconfigure or recreate any related VNCoreMLRequest objects as well
+    }
+    
     private func createSpecificClassifier(forClass className: String) -> VNCoreMLModel? {
         let defaultConfig = MLModelConfiguration()
         var model: MLModel?

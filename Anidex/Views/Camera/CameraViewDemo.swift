@@ -25,7 +25,7 @@ struct CameraViewDemo: View {
     
     
 //    @State private var animalImages: [UIImage] = [UIImage(named: "animal_\(i)") , ] //demo photo library
-    @State private var animalImages: [Image] = [Image("animal_1"), Image("animal_2"), Image("animal_3"),Image("animal_4"), Image("animal_5"), Image("animal_6"), Image("animal_7")]
+    @State private var animalImages: [Image] = [Image("animal_1"), Image("animal_2"), Image("animal_3"),Image("animal_4"), Image("animal_5"), Image("animal_6"), Image("animal_7"), Image("animal_8")]
     
     //placeholder variables to mimic the real functionality
     @State private var cameraIsTaken = false
@@ -314,7 +314,7 @@ struct CameraViewDemo: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                    ForEach(1...7, id: \.self) { index in
+                    ForEach(1...animalImages.count, id: \.self) { index in
                         Image("animal_\(index)")
                             .resizable()
                             .scaledToFit()
