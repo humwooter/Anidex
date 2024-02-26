@@ -12,7 +12,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var camera = CameraModel()
-    @State private var panelHeight: CGFloat = 100 // Minimized height
+    @State private var panelHeight: CGFloat = 100 
     @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.85
     
     @State var currentDragOffsetY: CGFloat = .zero
@@ -31,14 +31,12 @@ struct ContentView: View {
     
     var body : some View {
         VStack {
-//            Color(.green).ignoresSafeArea(.all, edges: .all)
             GeometryReader { geometry in
                 let totalHeight = geometry.size.height
                 let safeAreaBottom = geometry.safeAreaInsets.bottom
                 
                 
-                // Calculate offset
-                let startingOffsetY = 0.87 * totalHeight // Adjust as per your requirement
+                let startingOffsetY = 0.87 * totalHeight
                 let computedOffset = endingOffsetY + startingOffsetY + currentDragOffsetY
                 
                 
@@ -56,7 +54,7 @@ struct ContentView: View {
                     CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
                         .environmentObject(coreDataManager)
                         .offset(y: isFullscreen ? 0 : getCollectionsViewOffset(startingOffsetY: startingOffsetY + safeAreaBottom))
-                        .frame(height: isFullscreen ? totalHeight : nil) // Full height if fullscreen
+                        .frame(height: isFullscreen ? totalHeight : nil) 
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
@@ -79,7 +77,6 @@ struct ContentView: View {
                 .ignoresSafeArea(edges: .bottom)
                 .onChange(of: scenePhase) { newPhase in
                     if ((newPhase != .active) && (newPhase != .inactive)) {
-                        // set to camera state if leave app.
                         setCameraState(cameraMode: true)
                     }
                 }

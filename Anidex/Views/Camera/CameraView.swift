@@ -41,9 +41,9 @@ struct CameraView: View {
                                 let horizontalMovement = value.translation.width
                                 let verticalMovement = value.translation.height
                                 
-                                // Check for predominantly horizontal movement
+                                // check for mostly horizontal movement
                                 if abs(horizontalMovement) > abs(verticalMovement) {
-                                    // Right swipe
+                                    // right swipe
                                     if horizontalMovement > 0 {
                                         showMapView = true
                                     }
@@ -65,14 +65,9 @@ struct CameraView: View {
                         }
                     }
                 buttonBar_vertical().padding(.top, 40)
-//                if !camera.isTaken {
-//                    buttonBar_top()
-//                } else {
-//                    buttonBar_vertical().padding(.top, 40)
-//                }
-//                
+
                 if showMapView {
-                    MapView(showMapView: $showMapView) // Your custom MapView
+                    MapView(showMapView: $showMapView)
                         .transition(.move(edge: .leading))
                 }
             }
@@ -171,7 +166,6 @@ struct CameraView: View {
                                 withAnimation {
                                     vibration_medium.impactOccurred()
                                     camera.toggleCamera()
-                                    //                                    isFacingFront.toggle()
                                 }
                             }
                             
@@ -209,7 +203,6 @@ struct CameraView: View {
                         }).shadow(radius:2)
                         Spacer()
                     }.padding(.trailing, 15)
-                    //                        .padding(.top, 25)
                     
                 }
                 
@@ -265,7 +258,6 @@ struct CameraView: View {
                 }
                 .padding(.trailing, 10)
                 .padding(.leading, 25)
-                //                .padding(.top, 25)
             }
         }
     }

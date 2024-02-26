@@ -12,7 +12,6 @@ import CoreData
 struct ContentViewDemo: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var camera = CameraModel()
-    @State private var panelHeight: CGFloat = 100 // Minimized height
     @State var startingOffsetY: CGFloat = UIScreen.main.bounds.height * 0.85
     
     @State var currentDragOffsetY: CGFloat = .zero
@@ -23,7 +22,6 @@ struct ContentViewDemo: View {
     
     @State private var endOffset:CGFloat = 0
     @ObservedObject private var userPreferences = UserPreferences()
-//    @ObservedObject private var locationManager = LocationManager()
     
     private var coreDataManager = CoreDataManager(persistenceController: PersistenceController.shared)
 
@@ -31,14 +29,11 @@ struct ContentViewDemo: View {
     
     var body : some View {
         VStack {
-//            Color(.green).ignoresSafeArea(.all, edges: .all)
             GeometryReader { geometry in
                 let totalHeight = geometry.size.height
                 let safeAreaBottom = geometry.safeAreaInsets.bottom
                 
-                
-                // Calculate offset
-                let startingOffsetY = 0.87 * totalHeight // Adjust as per your requirement
+                let startingOffsetY = 0.87 * totalHeight
                 let computedOffset = endingOffsetY + startingOffsetY + currentDragOffsetY
                 
                 
@@ -46,7 +41,6 @@ struct ContentViewDemo: View {
                     Color(.black).ignoresSafeArea(.all, edges: .all)
                     
                     
-//                    CameraView(camera: camera)
                     CameraViewDemo()
                         .environmentObject(coreDataManager)
                         .environmentObject(userPreferences)
@@ -56,7 +50,7 @@ struct ContentViewDemo: View {
                     CollectionsParentView(isFullscreen: $isFullscreen).cornerRadius(40)
                         .environmentObject(coreDataManager)
                         .offset(y: isFullscreen ? 0 : getCollectionsViewOffset(startingOffsetY: startingOffsetY + safeAreaBottom))
-                        .frame(height: isFullscreen ? totalHeight : nil) // Full height if fullscreen
+                        .frame(height: isFullscreen ? totalHeight : nil) // full height if fullscreen
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
@@ -79,7 +73,6 @@ struct ContentViewDemo: View {
                 .ignoresSafeArea(edges: .bottom)
                 .onChange(of: scenePhase) { newPhase in
                     if ((newPhase != .active) && (newPhase != .inactive)) {
-                        // set to camera state if leave app.
                         setCameraState(cameraMode: true)
                     }
                 }

@@ -51,7 +51,6 @@ struct newAnimalSightingView: View {
                 }.padding(.horizontal).padding(.vertical, 2)
                 
             }
-//            .foregroundStyle(Color( UIColor.foregroundColor(background: UIColor(Color(predictionLabels[0] ?? "Mammalia")))))
             .navigationTitle(predictionLabels.count > 3 ? "New \(predictionLabels[4]) found" : "New \(predictionLabels[3]) found")
             .navigationBarItems(
                 leading: Button(action: {
@@ -112,9 +111,6 @@ struct newAnimalSightingView: View {
         print("longitude: \(newSighting.longitude )")
 
         
-
-        
-        // Fetch the log with the appropriate day
         let species = fetchSpeciesCategory(withScientificName: predictionLabels[3], context: viewContext)
 
         
@@ -126,7 +122,8 @@ struct newAnimalSightingView: View {
                 newSighting.relationship = animal_category
 
             } else {
-                // Create a new species
+                
+                // create a new species
                 let newSpecies = Species(context: viewContext)
                 newSpecies.id = UUID()
                 newSpecies.isDiscovered = true

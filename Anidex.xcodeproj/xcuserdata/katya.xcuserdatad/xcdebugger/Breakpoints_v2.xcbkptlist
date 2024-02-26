@@ -14,8 +14,8 @@
             filePath = "Anidex/Views/Camera/CameraView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -62,10 +62,10 @@
             filePath = "Anidex/Views/Camera/CameraViewDemo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
-            landmarkName = "CameraViewDemo"
-            landmarkType = "14">
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "processImageData(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

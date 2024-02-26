@@ -21,10 +21,10 @@ class ClassifierModel: NSObject, ObservableObject {
     
     // the classifiers
     private var chordataClassClassifier: VNCoreMLModel
-    private var specificClassClassifier: VNCoreMLModel? //one of four chordata classes
+    private var specificClassClassifier: VNCoreMLModel? // corresponds to one of the four chordata classes
     
     //vars
-    private var currentImage: UIImage? // State variable to save the current image
+    private var currentImage: UIImage?
     @Published var predictionLabel = ""
     @Published var confidenceLabel = ""
     
@@ -72,15 +72,13 @@ class ClassifierModel: NSObject, ObservableObject {
     }
     
     private func updateModelForBackground() {
-        // Example for updating one of the models, repeat for others as needed
         let config = MLModelConfiguration()
-        config.computeUnits = .cpuOnly // Force model to use CPU only in the simulator
+        config.computeUnits = .cpuOnly // force model to use CPU only in the simulator
         updateChordataClassModel(with: config)
     }
 
     private func updateModelForForeground() {
-        // Example for reverting the update, repeat for others as needed
-        let config = MLModelConfiguration() // Default configuration
+        let config = MLModelConfiguration()
         updateChordataClassModel(with: config)
     }
 
@@ -90,9 +88,7 @@ class ClassifierModel: NSObject, ObservableObject {
             fatalError("Could not update ChordataClass model configuration.")
         }
         self.chordataClassClassifier = visionModel
-        // Update the request as well
         self.chordataClassRequest = VNCoreMLRequest(model: visionModel, completionHandler: handleChordataClassification)
-        // Note: You might need to reconfigure or recreate any related VNCoreMLRequest objects as well
     }
     
     private func createSpecificClassifier(forClass className: String) -> VNCoreMLModel? {
@@ -129,7 +125,7 @@ class ClassifierModel: NSObject, ObservableObject {
     }
     
     func classifyForDemo(image: UIImage, completion: @escaping () -> Void) async{
-        self.currentImage = image // Save the current image
+        self.currentImage = image
         guard let chordataRequest = chordataClassRequest, let ciImage = CIImage(image: image) else { return }
 
         let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
@@ -162,7 +158,7 @@ class ClassifierModel: NSObject, ObservableObject {
     }
     
     func classify(image: UIImage, completion: @escaping () -> Void) {
-        self.currentImage = image // Save the current image
+        self.currentImage = image
         guard let chordataRequest = chordataClassRequest, let ciImage = CIImage(image: image) else { return }
 
         let handler = VNImageRequestHandler(ciImage: ciImage, options: [:])
@@ -176,7 +172,6 @@ class ClassifierModel: NSObject, ObservableObject {
                    let specificClassifier = self.createSpecificClassifier(forClass: bestResult) {
                     
                     
-                    print("BEST RESULT: \(bestResult)")
                     
                     // Create and perform Specific Classification
                     self.speciesClassificationRequest = VNCoreMLRequest(model: specificClassifier, completionHandler: self.handleSpecificClassification)
@@ -203,7 +198,6 @@ class ClassifierModel: NSObject, ObservableObject {
             self.confidenceLabel = String(bestResult.confidence)
             self.parseLabel(label: bestResult.identifier)
             self.isClassificationComplete = true
-            // Update additional UI elements or perform further actions as needed
         }
     }
     
@@ -241,7 +235,6 @@ extension ClassifierModel {
             self.speciesClassificationRequest = self.specificClassClassifier.flatMap {
                 let request = VNCoreMLRequest(model: $0, completionHandler: self.handleSpecificClassification)
 
-                // Set usesCPUOnly for simulator
                 #if targetEnvironment(simulator)
                 request.usesCPUOnly = true
                 #endif

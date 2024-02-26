@@ -63,11 +63,9 @@ struct MapView: View {
         }
     }
     func offsetForAnnotation(at index: Int) -> CGSize {
-        // Define the radius of the circle on which to place the annotations
         let radius: CGFloat = 20.0
-        // Calculate angle to spread each annotation equally in a circle
+        // calculating angle to spread each annotation equally in a circle
         let angle = (Double(index) * (360.0 / Double(annotations.count))) * (Double.pi / 180)
-        // Calculate offset
         let xOffset = cos(angle) * radius
         let yOffset = sin(angle) * radius
         return CGSize(width: xOffset, height: yOffset)
@@ -83,7 +81,7 @@ struct CustomAnnotationView: View {
         if !filename.isEmpty {
             CustomAsyncImageView(url: URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]).appendingPathComponent(filename))
                 .scaledToFit()
-                .frame(width: 30, height: 30) // Adjust size as needed
+                .frame(width: 30, height: 30) 
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
         }

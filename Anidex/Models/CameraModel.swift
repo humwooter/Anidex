@@ -101,7 +101,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     
     func retakePic() {
         print("in retake pic")
-        self.originalData = Data(count: 0) // Clear the original data
+        self.originalData = Data(count: 0) // clear the original data
         DispatchQueue.global(qos: .background).async {
             self.session.startRunning()
             

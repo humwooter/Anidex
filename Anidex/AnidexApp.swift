@@ -13,7 +13,7 @@ struct AnidexApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentViewDemo().environment(\.managedObjectContext, persistenceController.viewContext)
+            ContentView().environment(\.managedObjectContext, persistenceController.viewContext)
 
         }
     }

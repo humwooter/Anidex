@@ -28,7 +28,6 @@ extension Species {
 
 }
 
-// MARK: Generated accessors for relationship
 extension Species {
 
     @objc(addRelationshipObject:)

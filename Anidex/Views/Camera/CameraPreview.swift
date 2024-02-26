@@ -21,7 +21,6 @@ struct CameraPreview: UIViewRepresentable {
         
         DispatchQueue.main.async {
             camera.preview = AVCaptureVideoPreviewLayer(session: camera.session)
-//            camera.preview.videoGravity = .resizeAspect
             camera.preview.frame = view.frame
             view.layer.addSublayer(camera.preview)
         }
@@ -49,13 +48,11 @@ struct CameraPreview: UIViewRepresentable {
 
             uiView.addSubview(imageView)
         } else {
-            // Remove the image view if a new photo is being taken
             uiView.subviews.forEach { $0.removeFromSuperview() }
         }
     }
     
     func dismantleUIView(_ uiView: UIView, coordinator: Coordinator) {
-        // Stop the camera session when this view is no longer used
         camera.session.stopRunning()
     }
     
@@ -66,7 +63,7 @@ struct CameraPreview: UIViewRepresentable {
             self.parent = parent
         }
 
-        @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) { //check whether i need this
+        @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
             if gesture.state == .changed {
                 let scale = gesture.scale
                 parent.camera.zoom *= scale

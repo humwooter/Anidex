@@ -20,14 +20,11 @@ struct CameraViewDemo: View {
     @State private var showMapView = false
     
     @EnvironmentObject var userPreferences: UserPreferences
-//    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var coreDataManager: CoreDataManager
     
     
-//    @State private var animalImages: [UIImage] = [UIImage(named: "animal_\(i)") , ] //demo photo library
     @State private var animalImages: [Image] = [Image("animal_1"), Image("animal_2"), Image("animal_3"),Image("animal_4"), Image("animal_5"), Image("animal_6"), Image("animal_7"), Image("animal_8")]
     
-    //placeholder variables to mimic the real functionality
     @State private var cameraIsTaken = false
     @State private var cameraIsSaved = false
     @State private var showClassification = false
@@ -40,17 +37,7 @@ struct CameraViewDemo: View {
     @State private var predictions: [String] = []
     
     @State private var confidenceLabel = ""
-    
- 
 
-//    init() {
-//        for i in 1...7 {
-//            if let image = UIImage(named: "animal_\(i)") {
-//                animalImages.append(image)
-//            }
-//        }
-//    }
-    
 
     var body: some View {
         NavigationStack {
@@ -74,9 +61,7 @@ struct CameraViewDemo: View {
         }
         .sheet(isPresented: $isShowingImagePicker) {
             ImagePickerDemoView()
-  
-//            ImagePicker(selectedImage: self.$selectedImage, sourceType: .photoLibrary)
-        }
+          }
         .alert("Classification Result", isPresented: $showClassificationAlert) {
             Button("Save", role: .cancel) {
                 showAlert = false
@@ -97,7 +82,6 @@ struct CameraViewDemo: View {
         .sheet(isPresented: $showCreationPage) {
             if let image = selectedImage {
                 newAnimalSightingViewDemo(showCreationPage: showCreationPage, predictionLabels: self.predictions, selectedImage: image).accentColor(.green)
-                // Your code for newAnimalSightingView
             }
         }
     }
@@ -246,7 +230,6 @@ struct CameraViewDemo: View {
             
             else {
                 Button(action: {
-//                    selectedImage = UIImage(data: camera.originalData)
                 }, label: {
                     VStack {
                         ZStack {
@@ -319,7 +302,6 @@ struct CameraViewDemo: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
-//                            .cornerRadius(70)
                             .onTapGesture {
                                 
                                 selectedData  = nil
@@ -342,12 +324,5 @@ struct CameraViewDemo: View {
             .navigationTitle("Image Library Demo")
         }
     }
-//    private mutating func loadImages() {
-//        for i in 1...7 {
-//            if let image = UIImage(named: "animal_\(i)") {
-//                animalImages.append(image)
-//            }
-//        }
-//    }
 }
 

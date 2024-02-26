@@ -16,7 +16,7 @@ struct CameraPreviewDemo: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: UIScreen.main.bounds)
         
-        // If there is a selected image, display it
+        // if there is a selected image, display it
         if let selectedImage = selectedImage {
             let imageView = UIImageView(image: selectedImage)
             imageView.frame = view.bounds
@@ -29,19 +29,19 @@ struct CameraPreviewDemo: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        // If the selected image changes, update the view
+        // if the selected image changes, update the view
         if let selectedImage = selectedImage {
-            // Remove any existing subviews (e.g., old images)
+            // remove any existing subviews (e.g., old images)
             uiView.subviews.forEach { $0.removeFromSuperview() }
             
-            // Add the new image
+            // add the new image
             let imageView = UIImageView(image: selectedImage)
             imageView.frame = uiView.bounds
             imageView.contentMode = .scaleAspectFit
             imageView.backgroundColor = .black
             uiView.addSubview(imageView)
         } else {
-            // Remove the image view if there is no selected image
+            // remove the image view if there is no selected image
             uiView.subviews.forEach { $0.removeFromSuperview() }
         }
     }
