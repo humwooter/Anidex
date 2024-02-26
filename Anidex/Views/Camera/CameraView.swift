@@ -64,12 +64,13 @@ struct CameraView: View {
                             Spacer()
                         }
                     }
-                if !camera.isTaken {
-                    buttonBar_top()
-                } else {
-                    buttonBar_vertical().padding(.top, 40)
-                }
-                
+                buttonBar_vertical().padding(.top, 40)
+//                if !camera.isTaken {
+//                    buttonBar_top()
+//                } else {
+//                    buttonBar_vertical().padding(.top, 40)
+//                }
+//                
                 if showMapView {
                     MapView(showMapView: $showMapView) // Your custom MapView
                         .transition(.move(edge: .leading))

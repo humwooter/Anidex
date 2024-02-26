@@ -207,10 +207,7 @@ extension ClassifierModel {
 
                 return request
             }
-//
-//            self.speciesClassificationRequest = self.specificClassClassifier.flatMap {
-//                VNCoreMLRequest(model: $0, completionHandler: self.handleSpecificClassification)
-//            }
+
             self.classifyWithSpecificClassifier(image: currentImage)
         }
     }

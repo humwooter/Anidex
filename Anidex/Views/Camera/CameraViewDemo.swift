@@ -289,23 +289,7 @@ struct CameraViewDemo: View {
     
         }
     }
-    
-//    func processImageData(_ imageData: Data) {
-//        print("ENTERED PROCESS IMAGE DATA")
-//        self.selectedData = imageData
-//        if let uiImage = UIImage(data: imageData) {
-//            self.classifierModel.classify(image: uiImage) {
-//                self.isProcessing = false
-//                print("Prediction: \(self.classifierModel.predictionLabel)")
-//                parseLabel(label: self.classifierModel.predictionLabel)
-////                self.predictions = self.classifierModel.predictionLabel.split(separator: "_").map { String($0) }
-//                self.confidenceLabel = self.classifierModel.confidenceLabel
-//                self.showClassificationAlert = true
-//                self.cameraIsTaken = true
-//            }
-//        }
-//    }
-//    
+
     func processImageData(_ imageData: Data) {
         print("ENTERED PROCESS IMAGE DATA")
         print("IMAGE DATA \(imageData)")
@@ -321,12 +305,6 @@ struct CameraViewDemo: View {
                     self.cameraIsTaken = true
 
                 }
-//                self.isProcessing = false
-//                print("Prediction: \(self.classifierModel.predictionLabel)")
-//                parseLabel(label: self.classifierModel.predictionLabel)
-//                self.confidenceLabel = self.classifierModel.confidenceLabel
-                // Now you can safely update UI or state variables here if needed
-                // Remember to switch to the main thread if updating any @Published properties or state variables that affect the UI
             }
         }
     }
