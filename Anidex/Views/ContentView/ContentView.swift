@@ -108,34 +108,35 @@ struct ContentView: View {
         let input_labels = "AnimalLabels"
         
         if let path = Bundle.main.path(forResource: input_labels, ofType: "txt") {
-               do {
-                   let data = try String(contentsOfFile: path, encoding: .utf8)
-                   let labels = data.components(separatedBy: .newlines)
-                   for label in labels {
-                       if !label.isEmpty {
-                           let newSpecies = Species(context: viewContext)
-                           
-                           let components = label.components(separatedBy: " ")
-                           if components.count == 2 {
-                               newSpecies.id = UUID()
-                               newSpecies.commonLabel = components[0]
-                               newSpecies.classLabel = components[1]
-                               newSpecies.isDiscovered = false
-                               
-                               do {
-                                   try viewContext.save()
-                               } catch {
-                                   print("Failed to save new Species entry: \(error)")
-                               }
-                           }
-                       }
-                   }
-                   
-               } catch {
-                   print(error)
-               }
-           }
-       }
+            do {
+                let data = try String(contentsOfFile: path, encoding: .utf8)
+                let labels = data.components(separatedBy: .newlines)
+                for label in labels {
+                    if !label.isEmpty {
+                        let components = label.components(separatedBy: " ")
+                        if components.count == 2 {
+                            let fetchRequest: NSFetchRequest<Species> = Species.fetchRequest()
+                            fetchRequest.predicate = NSPredicate(format: "commonLabel == %@ AND classLabel == %@", components[0], components[1])
+                            
+                            let existingSpecies = try viewContext.fetch(fetchRequest)
+                            if existingSpecies.isEmpty {
+                                let newSpecies = Species(context: viewContext)
+                                newSpecies.id = UUID()
+                                newSpecies.commonLabel = components[0]
+                                newSpecies.classLabel = components[1]
+                                newSpecies.isDiscovered = false
+                                
+                                try viewContext.save()
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error initializing species: \(error)")
+            }
+        }
+    }
+
     
     private func getCollectionsViewOffset(startingOffsetY: CGFloat) -> CGFloat {
         
